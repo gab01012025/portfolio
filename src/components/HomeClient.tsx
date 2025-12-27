@@ -10,12 +10,10 @@ import Footer from '@/components/Footer'
 import ScrollToTop from '@/components/ScrollToTop'
 import ThemeToggleSimple from '@/components/ThemeToggleSimple'
 import LanguageToggleSimple from '@/components/LanguageToggleSimple'
-import CursorEffect from '@/components/CursorEffect'
 
 export default function HomeClient() {
   return (
     <main className="min-h-screen relative">
-      <CursorEffect />
       <Header />
       <Hero />
       <About />

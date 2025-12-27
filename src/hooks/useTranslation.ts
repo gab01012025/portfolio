@@ -8,7 +8,7 @@ const translations = {
   pt: {
     // Header
     home: 'Home',
-    about: 'Sobre',
+    about: 'Serviços',
     skills: 'Skills',
     projects: 'Projetos',
     contact: 'Contato',
@@ -17,73 +17,63 @@ const translations = {
     // Hero
     availableForProjects: 'Disponível para projetos',
     hello: 'Olá, sou',
-    frontendDeveloper: 'Frontend Developer',
-    letsWorkTogether: 'Vamos Trabalhar Juntos',
-    viewWorks: 'Ver Trabalhos',
-    downloadCV: 'Download CV',
-    yearsExp: 'Anos Exp.',
+    role: 'Backend Developer & Integrações',
+    heroDescription: 'Desenvolvo APIs, integrações de sistemas e automações. Especializado em conectar CRMs com plataformas de ads, criar webhooks e APIs REST.',
     projects_count: 'Projetos',
-    dedication: 'Dedicação',
-    scroll: 'Scroll',
-    heroDescription: 'Especializado em criar interfaces modernas e responsivas com React e JavaScript. Forte experiência em design, integração de APIs e performance.',
+    delivery: 'Entrega',
+    response: 'Resposta',
+    letsWorkTogether: 'Fale Comigo',
+    viewWorks: 'Ver Projetos',
     
-    // About
-    aboutTitle: 'Sobre Mim',
-    aboutSubtitle: 'Desenvolvedor Frontend Freelancer apaixonado por criar experiências',
-    aboutDescription: 'Sou um Desenvolvedor Frontend Freelancer especializado em React.js e Next.js, com forte experiência em criar interfaces web modernas, responsivas e de alto desempenho. Atualmente morando em Lisboa, Portugal, trabalho de forma independente transformando designs em código limpo e eficiente para clientes ao redor do mundo.',
-    uiuxDesign: 'UI/UX Design',
-    uiuxDescription: 'Implemento designs pixel-perfect com foco em acessibilidade',
-    performance: 'Performance',
-    performanceDescription: 'Otimizo aplicações para velocidade e eficiência',
-    responsive: 'Responsive Design',
-    responsiveDescription: 'Mobile-first, compatível com todos os dispositivos',
-    reactExpert: 'React Expert',
-    reactExpertDescription: 'Domínio em React, hooks, context e estado global',
+    // About/Services
+    aboutTitle: 'O que faço',
+    aboutSubtitle: 'Soluções backend para o seu negócio',
+    aboutDescription: 'Sou desenvolvedor backend freelancer baseado em Lisboa. Trabalho com empresas e agências que precisam conectar sistemas, automatizar processos ou criar APIs. Meu foco é entregar soluções que funcionam e são fáceis de manter.',
     
-    // Experience
-    experienceTitle: 'Experiência',
-    workExperience: 'Experiência Profissional',
-    present: 'Atual',
+    integrations: 'Integrações',
+    integrationsDesc: 'Conecto CRMs, ERPs e plataformas de marketing. Piperun, RD Station, Meta Ads, Google Ads.',
+    apis: 'APIs RESTful',
+    apisDesc: 'Crio APIs com Node.js/Express ou Python/FastAPI. Autenticação, documentação, deploy.',
+    bots: 'Bots & Scraping',
+    botsDesc: 'Desenvolvo bots para WhatsApp, Telegram e Discord. Coleta de dados automatizada.',
+    automations: 'Automações',
+    automationsDesc: 'Automatizo processos de negócio com n8n, webhooks e scripts personalizados.',
     
     // Skills
-    skillsTitle: 'Skills & Tecnologias',
-    skillsDescription: 'Ferramentas e tecnologias que uso para criar experiências incríveis',
-    frontend: 'Frontend',
-    backendDatabase: 'Backend & Database',
-    toolsLearning: 'Tools & Learning',
+    skillsTitle: 'Tecnologias',
+    skillsDescription: 'Stack principal que uso nos projetos',
     
     // Projects
-    projectsTitle: 'Projetos em',
-    projectsHighlight: 'Destaque',
-    projectsSubtitle: 'Portfólio com projetos full-stack publicados',
-    featuredProject: 'Projeto em Destaque',
-    project: 'Projeto',
-    viewCode: 'Ver Código',
-    viewDemo: 'Ver Demo',
+    projectsTitle: 'Projetos',
+    projectsSubtitle: 'Alguns trabalhos recentes',
+    filterAll: 'Todos',
+    filterIntegration: 'Integrações',
+    filterApi: 'APIs',
+    featured: 'Destaque',
     viewMoreGithub: 'Ver mais no GitHub',
     
     // Contact
-    contactTitle: 'Vamos Conversar?',
-    contactSubtitle: 'Tem um projeto em mente? Entre em contato e vamos criar algo incrível juntos!',
-    contactInfo: 'Informações de Contato',
+    contactTitle: 'Vamos conversar?',
+    contactSubtitle: 'Descreva seu projeto e respondo em até 24 horas.',
+    contactInfo: 'Contato',
     availability: 'Disponibilidade',
-    availabilityText: 'Disponível para projetos frontend em React/Next.js/JavaScript, desenvolvimento de interfaces modernas e integração de APIs REST. Respondo geralmente em até 24 horas.',
-    yourName: 'Seu Nome',
-    yourEmail: 'Seu Email',
-    yourMessage: 'Sua Mensagem',
-    sendMessage: 'Enviar Mensagem',
+    availabilityText: 'Disponível para projetos de integrações, APIs e automações. Trabalho remoto para clientes em Portugal, Brasil e Europa.',
+    yourName: 'Nome',
+    yourEmail: 'Email',
+    yourMessage: 'Descreva seu projeto',
+    sendMessage: 'Enviar',
     or: 'ou',
-    contactDirect: 'Entre em contato direto',
+    contactDirect: 'Contato direto',
     
     // Footer
-    madeWith: 'Feito com',
-    by: 'por',
-    allRightsReserved: 'Todos os direitos reservados',
+    madeWith: 'Desenvolvido por',
+    by: '',
+    allRightsReserved: '',
   },
   en: {
     // Header
     home: 'Home',
-    about: 'About',
+    about: 'Services',
     skills: 'Skills',
     projects: 'Projects',
     contact: 'Contact',
@@ -92,68 +82,58 @@ const translations = {
     // Hero
     availableForProjects: 'Available for projects',
     hello: "Hi, I'm",
-    frontendDeveloper: 'Frontend Developer',
-    letsWorkTogether: "Let's Work Together",
-    viewWorks: 'View Works',
-    downloadCV: 'Download CV',
-    yearsExp: 'Years Exp.',
+    role: 'Backend Developer & Integrations',
+    heroDescription: 'I build APIs, system integrations and automations. Specialized in connecting CRMs with ad platforms, webhooks and REST APIs.',
     projects_count: 'Projects',
-    dedication: 'Dedication',
-    scroll: 'Scroll',
-    heroDescription: 'Specialized in creating modern and responsive interfaces with React and JavaScript. Strong experience in design, API integration and performance.',
+    delivery: 'Delivery',
+    response: 'Response',
+    letsWorkTogether: 'Contact Me',
+    viewWorks: 'View Projects',
     
-    // About
-    aboutTitle: 'About Me',
-    aboutSubtitle: 'Freelance Frontend Developer passionate about creating experiences',
-    aboutDescription: "I'm a Freelance Frontend Developer specialized in React.js and Next.js, with strong experience in creating modern, responsive and high-performance web interfaces. Currently living in Lisbon, Portugal, I work independently transforming designs into clean and efficient code for clients around the world.",
-    uiuxDesign: 'UI/UX Design',
-    uiuxDescription: 'I implement pixel-perfect designs with focus on accessibility',
-    performance: 'Performance',
-    performanceDescription: 'I optimize applications for speed and efficiency',
-    responsive: 'Responsive Design',
-    responsiveDescription: 'Mobile-first, compatible with all devices',
-    reactExpert: 'React Expert',
-    reactExpertDescription: 'Mastery in React, hooks, context and global state',
+    // About/Services
+    aboutTitle: 'What I do',
+    aboutSubtitle: 'Backend solutions for your business',
+    aboutDescription: "I'm a freelance backend developer based in Lisbon. I work with companies and agencies that need to connect systems, automate processes or build APIs. My focus is delivering solutions that work and are easy to maintain.",
     
-    // Experience
-    experienceTitle: 'Experience',
-    workExperience: 'Work Experience',
-    present: 'Present',
+    integrations: 'Integrations',
+    integrationsDesc: 'I connect CRMs, ERPs and marketing platforms. Piperun, RD Station, Meta Ads, Google Ads.',
+    apis: 'RESTful APIs',
+    apisDesc: 'I build APIs with Node.js/Express or Python/FastAPI. Auth, docs, deployment.',
+    bots: 'Bots & Scraping',
+    botsDesc: 'I develop bots for WhatsApp, Telegram and Discord. Automated data collection.',
+    automations: 'Automations',
+    automationsDesc: 'I automate business processes with n8n, webhooks and custom scripts.',
     
     // Skills
-    skillsTitle: 'Skills & Technologies',
-    skillsDescription: 'Tools and technologies I use to create amazing experiences',
-    frontend: 'Frontend',
-    backendDatabase: 'Backend & Database',
-    toolsLearning: 'Tools & Learning',
+    skillsTitle: 'Technologies',
+    skillsDescription: 'Main stack I use in projects',
     
     // Projects
-    projectsTitle: 'Featured',
-    projectsHighlight: 'Projects',
-    projectsSubtitle: 'Portfolio with published full-stack projects',
-    featuredProject: 'Featured Project',
-    project: 'Project',
-    viewCode: 'View Code',
-    viewDemo: 'View Demo',
+    projectsTitle: 'Projects',
+    projectsSubtitle: 'Some recent work',
+    filterAll: 'All',
+    filterIntegration: 'Integrations',
+    filterApi: 'APIs',
+    featured: 'Featured',
     viewMoreGithub: 'View more on GitHub',
     
     // Contact
-    contactTitle: "Let's Talk?",
-    contactSubtitle: 'Have a project in mind? Get in touch and let\'s create something amazing together!',
-    contactInfo: 'Contact Information',
+    contactTitle: "Let's talk?",
+    contactSubtitle: 'Describe your project and I will respond within 24 hours.',
+    contactInfo: 'Contact',
     availability: 'Availability',
-    availabilityText: 'Available for frontend projects in React/Next.js/JavaScript, modern interface development and REST API integration. I usually respond within 24 hours.',
-    yourName: 'Your Name',
-    yourEmail: 'Your Email',
-    yourMessage: 'Your Message',
-    sendMessage: 'Send Message',
+    availabilityText: 'Available for integration, API and automation projects. Remote work for clients in Portugal, Brazil and Europe.',
+    yourName: 'Name',
+    yourEmail: 'Email',
+    yourMessage: 'Describe your project',
+    sendMessage: 'Send',
     or: 'or',
-    contactDirect: 'Contact me directly',
+    contactDirect: 'Direct contact',
     
     // Footer
-    madeWith: 'Made with',
-    by: 'by',
-    allRightsReserved: 'All rights reserved',
+    madeWith: 'Developed by',
+    by: '',
+    allRightsReserved: '',
   },
 }
 
@@ -161,11 +141,9 @@ export function useTranslation() {
   const [language, setLanguage] = useState<Language>('pt')
 
   useEffect(() => {
-    // Carrega idioma salvo
     const savedLang = (localStorage.getItem('language') as Language) || 'pt'
     setLanguage(savedLang)
 
-    // Escuta mudanças de idioma
     const handleLanguageChange = (event: CustomEvent<Language>) => {
       setLanguage(event.detail)
     }
