@@ -1,101 +1,100 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, Github } from 'lucide-react'
 import { useTranslation } from '@/hooks/useTranslation'
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const { t } = useTranslation()
-  const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const navItems = [
-    { name: t('home'), href: '#home' },
-    { name: t('about'), href: '#about' },
-    { name: t('skills'), href: '#skills' },
-    { name: t('projects'), href: '#projects' },
-    { name: t('contact'), href: '#contact' },
+    { href: '#about', label: t('about') },
+    { href: '#projects', label: t('projects') },
+    { href: '#skills', label: t('skills') },
+    { href: '#contact', label: t('contact') },
   ]
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-slate-950/95 backdrop-blur-sm border-b border-slate-800' : 'bg-transparent'
+        scrolled ? 'bg-slate-950/90 backdrop-blur-lg shadow-lg' : 'bg-transparent'
       }`}
     >
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a href="#home" className="text-lg font-semibold text-slate-100 hover:text-emerald-400 transition-colors">
-            Gabriel Barreto
+          {/* Logo */}
+          <a href="#" className="flex items-center gap-2">
+            <span className="text-xl font-bold text-white">
+              GB<span className="text-emerald-400">.</span>
+            </span>
           </a>
 
-          {/* Desktop */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <a
-                key={item.name}
+                key={item.href}
                 href={item.href}
-                className="px-4 py-2 text-slate-400 hover:text-slate-100 transition-colors text-sm"
+                className="text-slate-300 hover:text-white text-sm font-medium transition-colors"
               >
-                {item.name}
+                {item.label}
               </a>
             ))}
             <a
-              href="#contact"
-              className="ml-4 px-5 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors"
+              href="https://github.com/gab01012025"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center text-slate-300 hover:text-white transition-colors"
             >
-              {t('hire')}
+              <Github className="w-4 h-4" />
             </a>
-          </div>
+          </nav>
 
-          {/* Mobile */}
+          {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-slate-400 hover:text-slate-100"
-            aria-label="Menu"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 text-slate-300 hover:text-white"
           >
-            {isOpen ? <X size={22} /> : <Menu size={22} />}
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
+      </div>
 
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden border-t border-slate-800"
-            >
-              <div className="py-4 space-y-1">
-                {navItems.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className="block px-4 py-2 text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 rounded-lg text-sm"
-                  >
-                    {item.name}
-                  </a>
-                ))}
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-slate-900 border-t border-slate-800"
+          >
+            <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
+              {navItems.map((item) => (
                 <a
-                  href="#contact"
-                  onClick={() => setIsOpen(false)}
-                  className="block mx-4 mt-2 py-2 bg-emerald-600 text-white text-center text-sm font-medium rounded-lg"
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-slate-300 hover:text-white py-2 transition-colors"
                 >
-                  {t('hire')}
+                  {item.label}
                 </a>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

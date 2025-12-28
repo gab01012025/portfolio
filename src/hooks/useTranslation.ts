@@ -1,162 +1,91 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-
-type Language = 'pt' | 'en'
+import { useLanguage } from '@/context/LanguageContext'
 
 const translations = {
-  pt: {
-    // Header
-    home: 'Home',
-    about: 'Serviços',
-    skills: 'Skills',
-    projects: 'Projetos',
-    contact: 'Contato',
-    hire: 'Contratar',
-    
-    // Hero
-    availableForProjects: 'Disponível para projetos',
-    hello: 'Olá, sou',
-    role: 'Backend Developer & Integrações',
-    heroDescription: 'Desenvolvo APIs, integrações de sistemas e automações. Especializado em conectar CRMs com plataformas de ads, criar webhooks e APIs REST.',
-    projects_count: 'Projetos',
-    delivery: 'Entrega',
-    response: 'Resposta',
-    letsWorkTogether: 'Fale Comigo',
-    viewWorks: 'Ver Projetos',
-    
-    // About/Services
-    aboutTitle: 'O que faço',
-    aboutSubtitle: 'Soluções backend para o seu negócio',
-    aboutDescription: 'Sou desenvolvedor backend freelancer baseado em Lisboa. Trabalho com empresas e agências que precisam conectar sistemas, automatizar processos ou criar APIs. Meu foco é entregar soluções que funcionam e são fáceis de manter.',
-    
-    integrations: 'Integrações',
-    integrationsDesc: 'Conecto CRMs, ERPs e plataformas de marketing. Piperun, RD Station, Meta Ads, Google Ads.',
-    apis: 'APIs RESTful',
-    apisDesc: 'Crio APIs com Node.js/Express ou Python/FastAPI. Autenticação, documentação, deploy.',
-    bots: 'Bots & Scraping',
-    botsDesc: 'Desenvolvo bots para WhatsApp, Telegram e Discord. Coleta de dados automatizada.',
-    automations: 'Automações',
-    automationsDesc: 'Automatizo processos de negócio com n8n, webhooks e scripts personalizados.',
-    
-    // Skills
-    skillsTitle: 'Tecnologias',
-    skillsDescription: 'Stack principal que uso nos projetos',
-    
-    // Projects
-    projectsTitle: 'Projetos',
-    projectsSubtitle: 'Alguns trabalhos recentes',
-    filterAll: 'Todos',
-    filterIntegration: 'Integrações',
-    filterApi: 'APIs',
-    featured: 'Destaque',
-    viewMoreGithub: 'Ver mais no GitHub',
-    
-    // Contact
-    contactTitle: 'Vamos conversar?',
-    contactSubtitle: 'Descreva seu projeto e respondo em até 24 horas.',
-    contactInfo: 'Contato',
-    availability: 'Disponibilidade',
-    availabilityText: 'Disponível para projetos de integrações, APIs e automações. Trabalho remoto para clientes em Portugal, Brasil e Europa.',
-    yourName: 'Nome',
-    yourEmail: 'Email',
-    yourMessage: 'Descreva seu projeto',
-    sendMessage: 'Enviar',
-    or: 'ou',
-    contactDirect: 'Contato direto',
-    
-    // Footer
-    madeWith: 'Desenvolvido por',
-    by: '',
-    allRightsReserved: '',
-  },
   en: {
     // Header
-    home: 'Home',
-    about: 'Services',
-    skills: 'Skills',
+    about: 'About',
     projects: 'Projects',
+    skills: 'Skills',
     contact: 'Contact',
-    hire: 'Hire Me',
     
     // Hero
-    availableForProjects: 'Available for projects',
-    hello: "Hi, I'm",
-    role: 'Backend Developer & Integrations',
-    heroDescription: 'I build APIs, system integrations and automations. Specialized in connecting CRMs with ad platforms, webhooks and REST APIs.',
-    projects_count: 'Projects',
-    delivery: 'Delivery',
-    response: 'Response',
-    letsWorkTogether: 'Contact Me',
-    viewWorks: 'View Projects',
+    availableForProjects: 'Available for Projects',
+    greeting: 'Backend Developer & Integrations',
+    name: 'Gabriel Barreto',
+    role: 'Backend Developer',
+    heroDescription: 'I build APIs, integrations and bots that automate processes and connect systems. Specialized in Node.js, Express, and professional webhooks.',
+    viewProjects: 'View Projects',
+    getInTouch: 'Get in Touch',
     
-    // About/Services
-    aboutTitle: 'What I do',
-    aboutSubtitle: 'Backend solutions for your business',
-    aboutDescription: "I'm a freelance backend developer based in Lisbon. I work with companies and agencies that need to connect systems, automate processes or build APIs. My focus is delivering solutions that work and are easy to maintain.",
-    
+    // About
+    aboutTitle: 'About Me',
+    aboutSubtitle: 'Specialized in backend development and systems integration',
+    aboutDescription: 'Backend developer focused on building scalable APIs, CRM integrations with advertising platforms, and automation bots. I work with Node.js, Express, Python, and modern tools like Docker and CI/CD. Based in Portugal, available for projects worldwide.',
     integrations: 'Integrations',
-    integrationsDesc: 'I connect CRMs, ERPs and marketing platforms. Piperun, RD Station, Meta Ads, Google Ads.',
-    apis: 'RESTful APIs',
-    apisDesc: 'I build APIs with Node.js/Express or Python/FastAPI. Auth, docs, deployment.',
-    bots: 'Bots & Scraping',
-    botsDesc: 'I develop bots for WhatsApp, Telegram and Discord. Automated data collection.',
+    integrationsDesc: 'CRM connection with Meta Ads, Google Ads, and other platforms.',
+    apis: 'REST APIs',
+    apisDesc: 'Scalable and secure APIs with Node.js, Express, and FastAPI.',
+    bots: 'Bots',
+    botsDesc: 'Telegram, WhatsApp, and Discord bots for automation.',
     automations: 'Automations',
-    automationsDesc: 'I automate business processes with n8n, webhooks and custom scripts.',
-    
-    // Skills
-    skillsTitle: 'Technologies',
-    skillsDescription: 'Main stack I use in projects',
+    automationsDesc: 'Process automation with n8n, webhooks, and custom scripts.',
     
     // Projects
     projectsTitle: 'Projects',
-    projectsSubtitle: 'Some recent work',
-    filterAll: 'All',
-    filterIntegration: 'Integrations',
-    filterApi: 'APIs',
-    featured: 'Featured',
-    viewMoreGithub: 'View more on GitHub',
+    
+    // Skills
+    skillsTitle: 'Skills',
     
     // Contact
-    contactTitle: "Let's talk?",
-    contactSubtitle: 'Describe your project and I will respond within 24 hours.',
-    contactInfo: 'Contact',
-    availability: 'Availability',
-    availabilityText: 'Available for integration, API and automation projects. Remote work for clients in Portugal, Brazil and Europe.',
-    yourName: 'Name',
-    yourEmail: 'Email',
-    yourMessage: 'Describe your project',
-    sendMessage: 'Send',
-    or: 'or',
-    contactDirect: 'Direct contact',
+    contactTitle: 'Get in Touch',
+  },
+  pt: {
+    // Header
+    about: 'Sobre',
+    projects: 'Projetos',
+    skills: 'Skills',
+    contact: 'Contato',
     
-    // Footer
-    madeWith: 'Developed by',
-    by: '',
-    allRightsReserved: '',
+    // Hero
+    availableForProjects: 'Disponível para Projetos',
+    greeting: 'Backend Developer & Integrações',
+    name: 'Gabriel Barreto',
+    role: 'Backend Developer',
+    heroDescription: 'Construo APIs, integrações e bots que automatizam processos e conectam sistemas. Especializado em Node.js, Express e webhooks profissionais.',
+    viewProjects: 'Ver Projetos',
+    getInTouch: 'Entre em Contato',
+    
+    // About
+    aboutTitle: 'Sobre Mim',
+    aboutSubtitle: 'Especializado em desenvolvimento backend e integrações de sistemas',
+    aboutDescription: 'Desenvolvedor backend focado em criar APIs escaláveis, integrações de CRMs com plataformas de anúncios, e bots de automação. Trabalho com Node.js, Express, Python e ferramentas modernas como Docker e CI/CD. Baseado em Portugal, disponível para projetos em todo o mundo.',
+    integrations: 'Integrações',
+    integrationsDesc: 'Conexão de CRMs com Meta Ads, Google Ads e outras plataformas.',
+    apis: 'APIs RESTful',
+    apisDesc: 'APIs escaláveis e seguras com Node.js, Express e FastAPI.',
+    bots: 'Bots',
+    botsDesc: 'Bots para Telegram, WhatsApp e Discord para automação.',
+    automations: 'Automações',
+    automationsDesc: 'Automação de processos com n8n, webhooks e scripts customizados.',
+    
+    // Projects
+    projectsTitle: 'Projetos',
+    
+    // Skills
+    skillsTitle: 'Skills',
+    
+    // Contact
+    contactTitle: 'Entre em Contato',
   },
 }
 
-export function useTranslation() {
-  const [language, setLanguage] = useState<Language>('pt')
+export const useTranslation = () => {
+  const { language } = useLanguage()
 
-  useEffect(() => {
-    const savedLang = (localStorage.getItem('language') as Language) || 'pt'
-    setLanguage(savedLang)
-
-    const handleLanguageChange = (event: CustomEvent<Language>) => {
-      setLanguage(event.detail)
-    }
-
-    window.addEventListener('languageChange', handleLanguageChange as EventListener)
-    
-    return () => {
-      window.removeEventListener('languageChange', handleLanguageChange as EventListener)
-    }
-  }, [])
-
-  const t = (key: keyof typeof translations.pt): string => {
-    return translations[language][key] || key
+  const t = (key: keyof typeof translations.en): string => {
+    return translations[language][key] || translations.en[key] || key
   }
 
   return { t, language }

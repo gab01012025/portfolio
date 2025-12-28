@@ -1,89 +1,130 @@
 'use client'
 
-import { ArrowRight, Server, Download } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ArrowRight, Github, Mail } from 'lucide-react'
 import { useTranslation } from '@/hooks/useTranslation'
 
 const Hero = () => {
   const { t } = useTranslation()
-  
+
+  const techBadges = ['Node.js', 'Python', 'APIs REST', 'Webhooks', 'MongoDB']
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full filter blur-3xl"></div>
-      </div>
+    <section className="min-h-screen flex items-center pt-16 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl">
+          {/* Available badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-6"
+          >
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-sm text-emerald-400">
+              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+              {t('availableForProjects')}
+            </span>
+          </motion.div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto text-center py-20">
-          
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-8">
-            <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
-            <span className="text-sm text-emerald-300">{t('availableForProjects')}</span>
-          </div>
+          {/* Main heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight"
+          >
+            {t('name')}
+          </motion.h1>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            <span className="text-slate-100">{t('hello')}</span>
-            <span className="text-emerald-400"> Gabriel Barreto</span>
-          </h1>
-          
-          <p className="text-xl sm:text-2xl text-slate-300 mb-4">
-            {t('role')}
-          </p>
-          
-          <p className="text-base text-slate-500 mb-8">
-            Node.js • Python • APIs • Webhooks • MongoDB
-          </p>
-          
-          <p className="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto mb-10">
+          {/* Role */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-2xl sm:text-3xl text-emerald-400 font-medium mb-6"
+          >
+            {t('greeting')}
+          </motion.p>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-lg sm:text-xl text-slate-400 mb-8 max-w-2xl leading-relaxed"
+          >
             {t('heroDescription')}
-          </p>
-          
-          <div className="flex justify-center gap-8 mb-12">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-slate-100">15+</div>
-              <div className="text-sm text-slate-500">{t('projects_count')}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-slate-100">100%</div>
-              <div className="text-sm text-slate-500">{t('delivery')}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-slate-100">24h</div>
-              <div className="text-sm text-slate-500">{t('response')}</div>
-            </div>
-          </div>
+          </motion.p>
 
-          <div className="flex flex-wrap justify-center gap-4">
+          {/* Tech badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-wrap gap-2 mb-8"
+          >
+            {techBadges.map((tech) => (
+              <span
+                key={tech}
+                className="px-3 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-slate-300"
+              >
+                {tech}
+              </span>
+            ))}
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="flex flex-wrap gap-4"
+          >
             <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 transition-colors"
+              href="#projects"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors"
             >
-              {t('letsWorkTogether')}
+              {t('viewProjects')}
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
-              href="#projects"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 text-slate-100 font-medium rounded-lg border border-slate-700 hover:bg-slate-700 transition-colors"
+              href="#contact"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white rounded-lg transition-colors"
             >
-              {t('viewWorks')}
+              <Mail className="w-4 h-4" />
+              {t('getInTouch')}
             </a>
             <a
-              href="/Gabriel_Barreto_CV.pdf"
-              download
-              className="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 text-slate-100 font-medium rounded-lg border border-slate-700 hover:border-emerald-500 transition-colors"
+              href="https://github.com/gab01012025"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-slate-700 hover:border-slate-600 text-slate-300 hover:text-white rounded-lg transition-colors"
             >
-              <Download className="w-4 h-4" />
-              CV
+              <Github className="w-4 h-4" />
+              GitHub
             </a>
-          </div>
-        </div>
-      </div>
+          </motion.div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <div className="flex flex-col items-center gap-2 text-slate-500">
-          <div className="w-5 h-8 border border-slate-700 rounded-full flex justify-center">
-            <div className="w-1 h-2 bg-emerald-500 rounded-full mt-1.5 animate-bounce"></div>
-          </div>
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="grid grid-cols-3 gap-6 mt-16 pt-8 border-t border-slate-800"
+          >
+            <div>
+              <p className="text-3xl font-bold text-white">20+</p>
+              <p className="text-slate-400 text-sm">Projetos</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-white">100%</p>
+              <p className="text-slate-400 text-sm">Entrega</p>
+            </div>
+            <div>
+              <p className="text-3xl font-bold text-white">&lt;24h</p>
+              <p className="text-slate-400 text-sm">Resposta</p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
