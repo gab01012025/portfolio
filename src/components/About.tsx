@@ -1,197 +1,146 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Webhook, Server, Bot, Workflow, ArrowRight, CheckCircle } from 'lucide-react'
+import { Webhook, Server, Bot, Zap, CheckCircle, ArrowRight } from 'lucide-react'
 import { useTranslation } from '@/hooks/useTranslation'
 
 const About = () => {
   const { t } = useTranslation()
-  
+
   const services = [
     {
       icon: Webhook,
-      title: 'Integrações',
-      description: 'Conecto CRMs e ERPs com plataformas de anúncios (Meta, Google) usando APIs e webhooks profissionais.',
-      tags: ['Meta Ads CAPI', 'Google Ads', 'Piperun', 'RD Station'],
-      color: 'emerald',
-      highlight: 'Especialidade principal'
+      title: t('integrations'),
+      description: t('integrationsDesc'),
+      color: 'from-purple-500 to-pink-500',
+      bgColor: 'bg-purple-500/10',
+      borderColor: 'border-purple-500/30',
+      highlight: t('mainSpecialty'),
     },
     {
       icon: Server,
-      title: 'APIs RESTful',
-      description: 'Desenvolvo APIs escaláveis, seguras e bem documentadas para aplicações web e mobile.',
-      tags: ['Node.js', 'Express', 'FastAPI', 'JWT/OAuth'],
-      color: 'blue',
-      highlight: null
+      title: t('apis'),
+      description: t('apisDesc'),
+      color: 'from-blue-500 to-cyan-500',
+      bgColor: 'bg-blue-500/10',
+      borderColor: 'border-blue-500/30',
     },
     {
       icon: Bot,
-      title: 'Bots & Automações',
-      description: 'Crio bots para Telegram, WhatsApp e Discord que automatizam tarefas e melhoram processos.',
-      tags: ['Telegram Bot', 'WhatsApp API', 'Discord.js', 'Web Scraping'],
-      color: 'purple',
-      highlight: null
+      title: t('bots'),
+      description: t('botsDesc'),
+      color: 'from-green-500 to-emerald-500',
+      bgColor: 'bg-green-500/10',
+      borderColor: 'border-green-500/30',
     },
     {
-      icon: Workflow,
-      title: 'Automações de Processos',
-      description: 'Automatizo fluxos de trabalho com ferramentas low-code e scripts customizados.',
-      tags: ['n8n', 'Webhooks', 'Cron Jobs', 'Scripts Python'],
-      color: 'orange',
-      highlight: null
+      icon: Zap,
+      title: t('automations'),
+      description: t('automationsDesc'),
+      color: 'from-orange-500 to-yellow-500',
+      bgColor: 'bg-orange-500/10',
+      borderColor: 'border-orange-500/30',
     },
   ]
 
-  const colorClasses = {
-    emerald: {
-      bg: 'bg-emerald-500/10',
-      text: 'text-emerald-400',
-      border: 'border-emerald-500/30',
-      glow: 'group-hover:shadow-emerald-500/20'
-    },
-    blue: {
-      bg: 'bg-blue-500/10',
-      text: 'text-blue-400',
-      border: 'border-blue-500/30',
-      glow: 'group-hover:shadow-blue-500/20'
-    },
-    purple: {
-      bg: 'bg-purple-500/10',
-      text: 'text-purple-400',
-      border: 'border-purple-500/30',
-      glow: 'group-hover:shadow-purple-500/20'
-    },
-    orange: {
-      bg: 'bg-orange-500/10',
-      text: 'text-orange-400',
-      border: 'border-orange-500/30',
-      glow: 'group-hover:shadow-orange-500/20'
-    },
-  }
-
   const benefits = [
-    'Código limpo e bem documentado',
-    'Comunicação clara e transparente',
-    'Entrega dentro do prazo',
-    'Suporte pós-entrega incluído',
+    t('benefit1'),
+    t('benefit2'),
+    t('benefit3'),
+    t('benefit4'),
+    t('benefit5'),
+    t('benefit6'),
   ]
 
   return (
-    <section id="about" className="py-24 bg-gradient-to-b from-slate-950 to-slate-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-24 bg-slate-900 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 to-slate-900" />
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-sm text-emerald-400 mb-4">
-            Serviços
+          <span className="inline-block px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 text-sm font-medium mb-4">
+            {t('servicesTitle')}
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-            O que eu faço
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+            {t('servicesSubtitle')}
           </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Soluções backend sob medida para o seu negócio
-          </p>
         </motion.div>
 
-        {/* About text with benefits */}
+        {/* About Text + Benefits */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="max-w-4xl mx-auto mb-16"
+          className="max-w-4xl mx-auto mb-16 grid md:grid-cols-2 gap-8 items-center"
         >
-          <div className="bg-slate-800/30 border border-slate-700/50 rounded-2xl p-8">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-xl font-semibold text-white mb-4">Sobre mim</h3>
-                <p className="text-slate-300 leading-relaxed mb-4">
-                  Sou desenvolvedor backend focado em criar soluções que realmente funcionam. 
-                  Com experiência em integrações de sistemas, APIs e automações, ajudo empresas 
-                  a otimizar seus processos e conectar ferramentas de forma eficiente.
-                </p>
-                <p className="text-slate-400 leading-relaxed">
-                  Baseado em Lisboa, Portugal, trabalho remotamente com clientes de todo o mundo.
-                </p>
-              </div>
-              <div>
-                <h4 className="text-sm font-medium text-slate-400 mb-4">Por que trabalhar comigo</h4>
-                <ul className="space-y-3">
-                  {benefits.map((benefit, index) => (
-                    <motion.li
-                      key={benefit}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.2 + index * 0.1 }}
-                      className="flex items-center gap-3"
-                    >
-                      <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                      <span className="text-slate-300">{benefit}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+          <div>
+            <p className="text-slate-300 text-lg leading-relaxed">
+              {t('aboutDescription')}
+            </p>
+          </div>
+          <div className="bg-slate-800/50 border border-slate-700 rounded-2xl p-6">
+            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+              <CheckCircle className="w-5 h-5 text-emerald-400" />
+              {t('whyWorkWithMe')}
+            </h3>
+            <ul className="space-y-3">
+              {benefits.map((benefit, index) => (
+                <li key={index} className="flex items-center gap-3 text-slate-300 text-sm">
+                  <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                  {benefit}
+                </li>
+              ))}
+            </ul>
           </div>
         </motion.div>
 
-        {/* Services grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {services.map((service, index) => {
-            const colors = colorClasses[service.color as keyof typeof colorClasses]
-            return (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`group relative p-6 bg-slate-800/20 border border-slate-700/50 rounded-2xl hover:border-slate-600 transition-all duration-300 hover:shadow-xl ${colors.glow}`}
-              >
-                {service.highlight && (
-                  <span className={`absolute -top-3 right-6 px-3 py-1 ${colors.bg} ${colors.text} text-xs font-medium rounded-full border ${colors.border}`}>
-                    {service.highlight}
-                  </span>
-                )}
-                
-                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-5 ${colors.bg} ${colors.text}`}>
-                  <service.icon className="w-7 h-7" />
-                </div>
-                
-                <h3 className="text-xl font-semibold text-white mb-3">{service.title}</h3>
-                <p className="text-slate-400 mb-5 leading-relaxed">{service.description}</p>
-                
-                <div className="flex flex-wrap gap-2">
-                  {service.tags.map((tag) => (
-                    <span key={tag} className="px-3 py-1 text-xs bg-slate-700/50 text-slate-300 rounded-full border border-slate-600/50">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            )
-          })}
+        {/* Services Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className={`group relative p-6 rounded-2xl ${service.bgColor} border ${service.borderColor} hover:scale-105 transition-all duration-300`}
+            >
+              {service.highlight && (
+                <span className="absolute -top-3 right-4 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-medium rounded-full">
+                  {service.highlight}
+                </span>
+              )}
+              
+              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4`}>
+                <service.icon className="w-6 h-6 text-white" />
+              </div>
+              
+              <h3 className="text-xl font-semibold text-white mb-2">{service.title}</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">{service.description}</p>
+            </motion.div>
+          ))}
         </div>
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="text-center mt-12"
+          className="text-center"
         >
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 rounded-xl font-medium transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl transition-all shadow-lg shadow-emerald-500/25"
           >
-            Solicitar orçamento gratuito
-            <ArrowRight className="w-4 h-4" />
+            {t('requestQuote')}
+            <ArrowRight className="w-5 h-5" />
           </a>
         </motion.div>
       </div>

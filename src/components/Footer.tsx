@@ -1,125 +1,90 @@
 'use client'
 
-import { Github, Linkedin, Mail, Phone, Heart, ArrowUp } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear()
+  const { t } = useTranslation()
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const links = {
-    navigation: [
-      { name: 'Sobre', href: '#about' },
-      { name: 'Projetos', href: '#projects' },
-      { name: 'Skills', href: '#skills' },
-      { name: 'Contato', href: '#contact' },
-    ],
-    services: [
-      { name: 'Integrações', href: '#about' },
-      { name: 'APIs REST', href: '#about' },
-      { name: 'Bots', href: '#about' },
-      { name: 'Automações', href: '#about' },
-    ],
-    social: [
-      { icon: Github, href: 'https://github.com/gab01012025', label: 'GitHub' },
-      { icon: Linkedin, href: 'https://linkedin.com/in/gabriel-barreto-610a72370', label: 'LinkedIn' },
-      { icon: Mail, href: 'mailto:gabrielbarreto900@gmail.com', label: 'Email' },
-      { icon: Phone, href: 'https://wa.me/351969318391', label: 'WhatsApp' },
-    ],
-  }
+  const socialLinks = [
+    { icon: Github, href: 'https://github.com/gab01012025', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://linkedin.com/in/gabriel-barreto-610a72370', label: 'LinkedIn' },
+    { icon: Mail, href: 'mailto:gabrielbarreto900@gmail.com', label: 'Email' },
+  ]
 
   return (
     <footer className="bg-slate-950 border-t border-slate-800">
-      {/* Main Footer */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
-          <div className="lg:col-span-2">
-            <a href="#" className="flex items-center gap-2 mb-4">
-              <span className="text-2xl font-bold text-white">
-                GB<span className="text-emerald-400">.</span>
-              </span>
+          <div className="md:col-span-2">
+            <a href="#" className="text-2xl font-bold text-white mb-4 inline-block">
+              GB<span className="text-emerald-400">.</span>
             </a>
-            <p className="text-slate-400 mb-4 max-w-sm">
-              Backend Developer especializado em integrações de sistemas, APIs REST e automações. 
-              Transformando ideias em soluções técnicas robustas.
+            <p className="text-slate-400 text-sm max-w-sm mb-4">
+              {t('footerDescription')}
             </p>
-            <div className="flex gap-3">
-              {links.social.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-slate-800/50 hover:bg-emerald-500 border border-slate-700 hover:border-emerald-500 rounded-lg flex items-center justify-center text-slate-400 hover:text-white transition-all duration-300"
-                  aria-label={link.label}
-                >
-                  <link.icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
+            <p className="text-slate-500 text-sm">
+              {t('lisbon')} 🇵🇹
+            </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Navegação</h4>
+            <h4 className="text-white font-semibold mb-4">{t('navigation')}</h4>
             <ul className="space-y-2">
-              {links.navigation.map((link) => (
-                <li key={link.name}>
-                  <a 
-                    href={link.href}
-                    className="text-slate-400 hover:text-emerald-400 transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
+              <li><a href="#" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">{t('home')}</a></li>
+              <li><a href="#about" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">{t('about')}</a></li>
+              <li><a href="#projects" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">{t('projects')}</a></li>
+              <li><a href="#contact" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">{t('contact')}</a></li>
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Serviços</h4>
+            <h4 className="text-white font-semibold mb-4">{t('servicesFooter')}</h4>
             <ul className="space-y-2">
-              {links.services.map((link) => (
-                <li key={link.name}>
-                  <a 
-                    href={link.href}
-                    className="text-slate-400 hover:text-emerald-400 transition-colors text-sm"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
+              <li><span className="text-slate-400 text-sm">{t('crmIntegrations')}</span></li>
+              <li><span className="text-slate-400 text-sm">{t('restApis')}</span></li>
+              <li><span className="text-slate-400 text-sm">{t('telegramBots')}</span></li>
+              <li><span className="text-slate-400 text-sm">{t('automations')}</span></li>
             </ul>
           </div>
         </div>
-      </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-slate-800">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-slate-500 text-sm">
-              © {currentYear} Gabriel Barreto. Todos os direitos reservados.
-            </p>
-            
-            <div className="flex items-center gap-4">
-              <span className="text-slate-500 text-sm">Lisboa, Portugal 🇵🇹</span>
-              
-              <motion.button
-                onClick={scrollToTop}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="w-10 h-10 bg-slate-800 hover:bg-emerald-500 rounded-lg flex items-center justify-center text-slate-400 hover:text-white transition-all"
-                aria-label="Voltar ao topo"
+        {/* Bottom */}
+        <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-slate-500 text-sm">
+            © {new Date().getFullYear()} Gabriel Barreto. {t('allRightsReserved')}.
+          </p>
+          
+          <div className="flex items-center gap-4">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-slate-800/50 hover:bg-emerald-500/20 border border-slate-700 hover:border-emerald-500/50 rounded-lg flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all"
+                aria-label={social.label}
               >
-                <ArrowUp className="w-4 h-4" />
-              </motion.button>
-            </div>
+                <social.icon className="w-5 h-5" />
+              </a>
+            ))}
+            
+            <motion.button
+              onClick={scrollToTop}
+              whileHover={{ y: -3 }}
+              className="w-10 h-10 bg-emerald-500 hover:bg-emerald-600 rounded-lg flex items-center justify-center text-white transition-all"
+              aria-label={t('backToTop')}
+            >
+              <ArrowUp className="w-5 h-5" />
+            </motion.button>
           </div>
         </div>
       </div>

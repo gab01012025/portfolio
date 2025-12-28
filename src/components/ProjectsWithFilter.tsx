@@ -2,195 +2,164 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Github, ExternalLink, ArrowRight, Folder } from 'lucide-react'
+import { Github, ExternalLink, Star } from 'lucide-react'
 import { useTranslation } from '@/hooks/useTranslation'
 
 const ProjectsWithFilter = () => {
-  const { t } = useTranslation()
-  const [filter, setFilter] = useState('all')
-  
-  const projects = [
-    {
-      title: 'Webhook Piperun → Meta Ads',
-      description: 'Integração profissional que sincroniza conversões do CRM Piperun com a Meta Conversions API (CAPI) em tempo real. Permite rastrear leads e vendas com precisão para otimização de campanhas.',
-      tags: ['Node.js', 'Express', 'Meta CAPI', 'Docker', 'CI/CD'],
-      github: 'https://github.com/gab01012025/webhook-piperun-luana',
-      demo: null,
-      category: 'integration',
-      featured: true,
-      icon: '🔗'
-    },
-    {
-      title: 'Task Manager API',
-      description: 'API RESTful completa com autenticação JWT, CRUD de tarefas, validação com Joi e testes automatizados com Jest. Arquitetura MVC profissional.',
-      tags: ['Node.js', 'MongoDB', 'JWT', 'Jest', 'Docker'],
-      github: 'https://github.com/gab01012025/task-manager-fullstack',
-      demo: null,
-      category: 'api',
-      featured: true,
-      icon: '🚀'
-    },
-    {
-      title: 'Telegram Bot Demo',
-      description: 'Bot para Telegram com comandos personalizados e integração com APIs externas. Demonstra habilidades em automação e desenvolvimento de bots.',
-      tags: ['Node.js', 'Telegram API', 'Docker', 'Grammy'],
-      github: 'https://github.com/gab01012025/telegram-bot-demo',
-      demo: null,
-      category: 'bot',
-      featured: false,
-      icon: '🤖'
-    },
-  ]
+  const { t, language } = useTranslation()
+  const [activeFilter, setActiveFilter] = useState('all')
 
   const filters = [
-    { id: 'all', label: 'Todos' },
-    { id: 'integration', label: 'Integrações' },
-    { id: 'api', label: 'APIs' },
-    { id: 'bot', label: 'Bots' },
+    { id: 'all', label: t('filterAll') },
+    { id: 'integrations', label: t('filterIntegrations') },
+    { id: 'apis', label: t('filterApis') },
+    { id: 'bots', label: t('filterBots') },
   ]
 
-  const filteredProjects = filter === 'all' 
+  const projects = [
+    {
+      id: 1,
+      title: 'Webhook Piperun + Meta Ads',
+      description: language === 'pt' 
+        ? 'Integração completa entre CRM Piperun e Meta Ads API. Sincronização automática de leads e conversões offline.'
+        : 'Complete integration between Piperun CRM and Meta Ads API. Automatic synchronization of leads and offline conversions.',
+      category: 'integrations',
+      tech: ['Node.js', 'Express', 'Webhooks', 'Meta API'],
+      github: 'https://github.com/gab01012025/webhook-piperun',
+      featured: true,
+      color: 'from-purple-500 to-pink-500',
+    },
+    {
+      id: 2,
+      title: 'Task Manager API',
+      description: language === 'pt'
+        ? 'API RESTful completa para gerenciamento de tarefas. Autenticação JWT, CRUD completo, documentação Swagger.'
+        : 'Complete RESTful API for task management. JWT authentication, full CRUD, Swagger documentation.',
+      category: 'apis',
+      tech: ['Node.js', 'Express', 'MongoDB', 'JWT'],
+      github: 'https://github.com/gab01012025/task-manager-api',
+      featured: true,
+      color: 'from-blue-500 to-cyan-500',
+    },
+    {
+      id: 3,
+      title: 'Telegram Bot',
+      description: language === 'pt'
+        ? 'Bot para Telegram com comandos customizados, integração com APIs externas e automações.'
+        : 'Telegram bot with custom commands, external API integrations and automations.',
+      category: 'bots',
+      tech: ['Python', 'Telegram API', 'MongoDB'],
+      github: 'https://github.com/gab01012025/telegram-bot',
+      featured: false,
+      color: 'from-green-500 to-emerald-500',
+    },
+  ]
+
+  const filteredProjects = activeFilter === 'all' 
     ? projects 
-    : projects.filter(p => p.category === filter)
+    : projects.filter(p => p.category === activeFilter)
 
   return (
-    <section id="projects" className="py-24 bg-slate-950">
+    <section id="projects" className="py-24 bg-slate-950 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <span className="inline-block px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-sm text-emerald-400 mb-4">
-            Portfólio
+          <span className="inline-block px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 text-sm font-medium mb-4">
+            {t('projectsTitle')}
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Projetos em Destaque
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+            {t('projectsSubtitle')}
           </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Alguns dos projetos que demonstram minhas habilidades em backend e integrações
-          </p>
         </motion.div>
 
-        {/* Filters */}
+        {/* Filter Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="flex flex-wrap justify-center gap-3 mb-12"
         >
-          {filters.map((f) => (
+          {filters.map((filter) => (
             <button
-              key={f.id}
-              onClick={() => setFilter(f.id)}
-              className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                filter === f.id
-                  ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/25'
-                  : 'bg-slate-800/50 text-slate-400 hover:text-white border border-slate-700 hover:border-slate-600'
+              key={filter.id}
+              onClick={() => setActiveFilter(filter.id)}
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
+                activeFilter === filter.id
+                  ? 'bg-emerald-500 text-white'
+                  : 'bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700'
               }`}
             >
-              {f.label}
+              {filter.label}
             </button>
           ))}
         </motion.div>
 
-        {/* Projects grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          <AnimatePresence mode="wait">
+        {/* Projects Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => (
               <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className={`group relative bg-slate-800/30 border rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl ${
-                  project.featured 
-                    ? 'border-emerald-500/30 hover:border-emerald-500/50 hover:shadow-emerald-500/10' 
-                    : 'border-slate-700/50 hover:border-slate-600'
-                }`}
+                className="group bg-slate-800/50 border border-slate-700 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-all"
               >
-                {project.featured && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-medium rounded-full border border-emerald-500/30">
-                      ★ Destaque
-                    </span>
-                  </div>
-                )}
-
-                {/* Project header with icon */}
-                <div className="h-32 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px]" />
-                  <span className="text-5xl relative z-10">{project.icon}</span>
+                {/* Project Header */}
+                <div className={`h-32 bg-gradient-to-br ${project.color} relative overflow-hidden`}>
+                  <div 
+                    className="absolute inset-0 opacity-20"
+                    style={{
+                      backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+                      backgroundSize: '20px 20px'
+                    }}
+                  />
+                  {project.featured && (
+                    <div className="absolute top-3 right-3 flex items-center gap-1 px-2 py-1 bg-yellow-500/90 text-yellow-900 text-xs font-semibold rounded-full">
+                      <Star className="w-3 h-3 fill-current" />
+                      {t('featured')}
+                    </div>
+                  )}
                 </div>
 
+                {/* Project Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-emerald-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-slate-400 text-sm mb-5 leading-relaxed">
-                    {project.description}
-                  </p>
+                  <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
+                  <p className="text-slate-400 text-sm mb-4 line-clamp-2">{project.description}</p>
                   
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="px-3 py-1 text-xs bg-slate-700/50 text-slate-300 rounded-full border border-slate-600/50">
-                        {tag}
+                  {/* Tech Stack */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="px-2 py-1 bg-slate-700/50 text-slate-300 text-xs rounded">
+                        {tech}
                       </span>
                     ))}
                   </div>
 
                   {/* Links */}
-                  <div className="flex items-center gap-4 pt-4 border-t border-slate-700/50">
+                  <div className="flex items-center gap-3">
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-sm text-slate-400 hover:text-emerald-400 transition-colors"
+                      className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 hover:bg-slate-600/50 text-white text-sm font-medium rounded-lg transition-all"
                     >
                       <Github className="w-4 h-4" />
-                      Ver código
+                      {t('viewCode')}
                     </a>
-                    {project.demo && (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm text-slate-400 hover:text-emerald-400 transition-colors"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        Demo
-                      </a>
-                    )}
                   </div>
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
-
-        {/* GitHub profile link */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="text-center mt-12"
-        >
-          <a
-            href="https://github.com/gab01012025"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 text-white rounded-xl transition-all"
-          >
-            <Github className="w-5 h-5" />
-            Ver todos os projetos no GitHub
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </motion.div>
       </div>
     </section>
   )

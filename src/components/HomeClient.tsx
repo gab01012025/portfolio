@@ -8,8 +8,6 @@ import ProjectsWithFilter from '@/components/ProjectsWithFilter'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import ScrollToTop from '@/components/ScrollToTop'
-import ThemeToggleSimple from '@/components/ThemeToggleSimple'
-import LanguageToggleSimple from '@/components/LanguageToggleSimple'
 
 export default function HomeClient() {
   return (
@@ -22,8 +20,6 @@ export default function HomeClient() {
       <Contact />
       <Footer />
       <ScrollToTop />
-      <ThemeToggleSimple />
-      <LanguageToggleSimple />
     </main>
   )
 }

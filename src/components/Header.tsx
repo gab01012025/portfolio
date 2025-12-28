@@ -2,15 +2,24 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Github, Globe } from 'lucide-react'
+import { Menu, X, Github, Globe, Sun, Moon } from 'lucide-react'
 import { useTranslation } from '@/hooks/useTranslation'
 import { useLanguage } from '@/context/LanguageContext'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+  const [mounted, setMounted] = useState(false)
   const { t } = useTranslation()
   const { language, toggleLanguage } = useLanguage()
+
+  useEffect(() => {
+    setMounted(true)
+    const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' || 'dark'
+    setTheme(savedTheme)
+    document.documentElement.classList.toggle('light', savedTheme === 'light')
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +28,14 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark'
+    setTheme(newTheme)
+    localStorage.setItem('theme', newTheme)
+    document.documentElement.classList.toggle('light', newTheme === 'light')
+    document.documentElement.classList.toggle('dark', newTheme === 'dark')
+  }
 
   const navItems = [
     { href: '#about', label: t('about') },
@@ -44,7 +61,7 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="text-2xl font-bold text-white">
+            <span className="text-2xl font-bold">
               GB<span className="text-emerald-400">.</span>
             </span>
           </motion.a>
@@ -63,7 +80,18 @@ const Header = () => {
           </nav>
 
           {/* Right side */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2">
+            {/* Theme toggle */}
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                className="w-10 h-10 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700 rounded-lg flex items-center justify-center text-slate-300 hover:text-white transition-all"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+            )}
+
             {/* Language toggle */}
             <button
               onClick={toggleLanguage}
@@ -89,7 +117,7 @@ const Header = () => {
               href="#contact"
               className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium rounded-lg transition-all"
             >
-              Fale Comigo
+              {t('getInTouch')}
             </a>
           </div>
 
@@ -125,22 +153,32 @@ const Header = () => {
               ))}
               
               <div className="flex items-center gap-3 pt-4 mt-2 border-t border-slate-800">
+                {mounted && (
+                  <button
+                    onClick={toggleTheme}
+                    className="flex items-center gap-2 px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-300"
+                  >
+                    {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                    {theme === 'dark' ? 'Light' : 'Dark'}
+                  </button>
+                )}
+                
                 <button
                   onClick={toggleLanguage}
                   className="flex items-center gap-2 px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-300 text-sm"
                 >
                   <Globe className="w-4 h-4" />
-                  {language === 'pt' ? 'Português' : 'English'}
+                  {language === 'pt' ? 'PT' : 'EN'}
                 </button>
-                
-                <a
-                  href="#contact"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="flex-1 px-4 py-3 bg-emerald-500 text-white text-center font-medium rounded-lg"
-                >
-                  Fale Comigo
-                </a>
               </div>
+              
+              <a
+                href="#contact"
+                onClick={() => setIsMenuOpen(false)}
+                className="mt-2 px-4 py-3 bg-emerald-500 text-white text-center font-medium rounded-lg"
+              >
+                {t('getInTouch')}
+              </a>
             </nav>
           </motion.div>
         )}

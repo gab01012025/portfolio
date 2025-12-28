@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "pt_PT",
-    url: "https://gabrielbarreto.dev",
+    url: "https://gabrielbarreto.vercel.app",
     siteName: "Gabriel Barreto",
     title: "Gabriel Barreto | Backend Developer & Integrações",
     description: "APIs, integrações de sistemas e automações para o seu negócio.",
@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt" className="scroll-smooth">
+    <html lang="pt" className="scroll-smooth dark">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
