@@ -25,7 +25,7 @@ const ProjectsWithFilter = () => {
         : 'Complete integration between Piperun CRM and Meta Ads API. Automatic synchronization of leads and offline conversions.',
       category: 'integrations',
       tech: ['Node.js', 'Express', 'Webhooks', 'Meta API'],
-      github: 'https://github.com/gab01012025/webhook-piperun-luana',
+      github: 'https://github.com/gab01012025/webhook-piperun',
       featured: true,
       color: 'from-purple-500 to-pink-500',
     },
@@ -37,7 +37,7 @@ const ProjectsWithFilter = () => {
         : 'Complete RESTful API for task management. JWT authentication, full CRUD, Swagger documentation.',
       category: 'apis',
       tech: ['Node.js', 'Express', 'MongoDB', 'JWT'],
-      github: 'https://github.com/gab01012025/task-manager-fullstack',
+      github: 'https://github.com/gab01012025/task-manager-api',
       featured: true,
       color: 'from-blue-500 to-cyan-500',
     },
@@ -49,7 +49,7 @@ const ProjectsWithFilter = () => {
         : 'Telegram bot with custom commands, external API integrations and automations.',
       category: 'bots',
       tech: ['Python', 'Telegram API', 'MongoDB'],
-      github: 'https://github.com/gab01012025/telegram-bot-demo',
+      github: 'https://github.com/gab01012025/telegram-bot',
       featured: false,
       color: 'from-green-500 to-emerald-500',
     },
@@ -166,4 +166,3 @@ const ProjectsWithFilter = () => {
 }
 
 export default ProjectsWithFilter
-// Updated links - qui 08 jan 2026 19:03:52 WET
