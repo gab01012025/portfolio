@@ -1,198 +1,256 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Mail, Phone, Linkedin, MapPin, Send } from 'lucide-react'
-import { useState } from 'react'
-import { useTranslation } from '@/hooks/useTranslation'
+import { useRef, useState, FormEvent } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-const Contact = () => {
-  const { t } = useTranslation()
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  })
+export default function Contact() {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const isHeaderInView = useInView(headerRef, { once: true, margin: '-100px' });
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    const message = `*${t('subject')}:* ${formData.subject}%0A%0A*${t('yourName')}:* ${formData.name}%0A*${t('email')}:* ${formData.email}%0A%0A*${t('yourMessage')}:*%0A${formData.message}`
-    
-    const whatsappUrl = `https://wa.me/351969318391?text=${encodeURIComponent(message)}`
-    window.open(whatsappUrl, '_blank')
-  }
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStatus('sending');
 
-  const contactInfo = [
-    {
-      icon: Phone,
-      label: t('phone'),
-      value: '+351 969 318 391',
-      href: 'tel:+351969318391',
-    },
-    {
-      icon: Mail,
-      label: t('email'),
-      value: 'gabrielbarreto900@gmail.com',
-      href: 'mailto:gabrielbarreto900@gmail.com',
-    },
-    {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      value: 'Gabriel Barreto',
-      href: 'https://linkedin.com/in/gabriel-barreto-610a72370',
-    },
-    {
-      icon: MapPin,
-      label: t('location'),
-      value: t('lisbon'),
-      href: null,
-    },
-  ]
+    // Build WhatsApp message
+    const phone = '351969318391';
+    const text = `*Nova mensagem do portfólio*%0A%0A*Nome:* ${formData.name}%0A*Email:* ${formData.email}%0A*Assunto:* ${formData.subject}%0A%0A*Mensagem:*%0A${formData.message}`;
+    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+    setStatus('sent');
+    setTimeout(() => setStatus('idle'), 3000);
+  };
 
   return (
-    <section id="contact" className="py-24 bg-slate-950 relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 text-sm font-medium mb-4">
-            {t('contact')}
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-            {t('contactSubtitle')}
-          </h2>
-        </motion.div>
+    <section id="contact" className="relative py-32 px-6 lg:px-12">
+      <div className="max-w-6xl mx-auto">
+        <div className="h-[1px] w-full mb-16" style={{ backgroundColor: '#1a1a1a' }} />
 
-        <div className="max-w-5xl mx-auto">
-          <div className="grid lg:grid-cols-5 gap-8">
-            {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="lg:col-span-2 space-y-6"
-            >
-              <h3 className="text-xl font-semibold text-white mb-6">{t('orContactDirectly')}</h3>
-              
-              {contactInfo.map((item, index) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+        <div ref={headerRef}>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="font-mono text-xs tracking-[0.3em] uppercase block mb-4" style={{ color: '#00e87b' }}>
+              {'// Contato'}
+            </span>
+            <h2 className="text-4xl lg:text-6xl font-bold tracking-tight mb-4" style={{ color: '#e8e8e8' }}>
+              Tem um projeto?<br />
+              <span style={{ color: '#00e87b' }}>Vamos conversar.</span>
+            </h2>
+          </motion.div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
+          {/* Left: Contact form styled as API request */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="rounded-sm overflow-hidden" style={{ border: '1px solid #1a1a1a' }}>
+              {/* Request header */}
+              <div className="flex items-center gap-3 px-4 py-3" style={{ backgroundColor: '#0d0d0d', borderBottom: '1px solid #1a1a1a' }}>
+                <span
+                  className="font-mono text-[10px] uppercase px-2 py-0.5 rounded-sm"
+                  style={{ backgroundColor: '#00e87b22', color: '#00e87b' }}
                 >
-                  {item.href ? (
-                    <a
-                      href={item.href}
-                      target={item.href.startsWith('http') ? '_blank' : undefined}
-                      rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="flex items-center gap-4 p-4 bg-slate-800/50 border border-slate-700 rounded-xl hover:border-emerald-500/50 transition-all group"
-                    >
-                      <div className="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors">
-                        <item.icon className="w-5 h-5 text-emerald-400" />
-                      </div>
-                      <div>
-                        <p className="text-slate-400 text-sm">{item.label}</p>
-                        <p className="text-white font-medium">{item.value}</p>
-                      </div>
-                    </a>
-                  ) : (
-                    <div className="flex items-center gap-4 p-4 bg-slate-800/50 border border-slate-700 rounded-xl">
-                      <div className="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center">
-                        <item.icon className="w-5 h-5 text-emerald-400" />
-                      </div>
-                      <div>
-                        <p className="text-slate-400 text-sm">{item.label}</p>
-                        <p className="text-white font-medium">{item.value}</p>
-                      </div>
-                    </div>
-                  )}
-                </motion.div>
-              ))}
-            </motion.div>
+                  POST
+                </span>
+                <span className="font-mono text-xs" style={{ color: '#737373' }}>
+                  /api/contact
+                </span>
+              </div>
 
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="lg:col-span-3"
-            >
-              <form onSubmit={handleSubmit} className="bg-slate-800/50 border border-slate-700 rounded-2xl p-6 sm:p-8">
-                <div className="grid sm:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label className="block text-slate-300 text-sm font-medium mb-2">{t('yourName')}</label>
-                    <input
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-emerald-500 focus:outline-none transition-colors"
-                      placeholder="Gabriel"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-slate-300 text-sm font-medium mb-2">{t('yourEmail')}</label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-emerald-500 focus:outline-none transition-colors"
-                      placeholder="gabriel@email.com"
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div className="mb-4">
-                  <label className="block text-slate-300 text-sm font-medium mb-2">{t('subject')}</label>
-                  <select
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-emerald-500 focus:outline-none transition-colors"
+              {/* Form */}
+              <form onSubmit={handleSubmit} className="p-6 space-y-4" style={{ backgroundColor: '#0a0a0a' }}>
+                <div>
+                  <label className="block font-mono text-xs mb-2" style={{ color: '#4a4a4a' }}>
+                    {'"name"'}:
+                  </label>
+                  <input
+                    type="text"
                     required
-                  >
-                    <option value="">{t('selectSubject')}</option>
-                    <option value="crm-integration">{t('crmIntegration')}</option>
-                    <option value="api-rest">{t('restApi')}</option>
-                    <option value="bot">{t('telegramBot')}</option>
-                    <option value="automation">{t('automation')}</option>
-                    <option value="other">{t('other')}</option>
-                  </select>
-                </div>
-                
-                <div className="mb-6">
-                  <label className="block text-slate-300 text-sm font-medium mb-2">{t('yourMessage')}</label>
-                  <textarea
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    rows={5}
-                    className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-emerald-500 focus:outline-none transition-colors resize-none"
-                    placeholder={t('tellAboutProject')}
-                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 rounded-sm font-mono text-sm outline-none transition-colors duration-300 focus:border-[#00e87b]"
+                    style={{
+                      backgroundColor: '#111111',
+                      border: '1px solid #1a1a1a',
+                      color: '#e8e8e8',
+                    }}
+                    placeholder="Seu nome"
                   />
                 </div>
-                
+
+                <div>
+                  <label className="block font-mono text-xs mb-2" style={{ color: '#4a4a4a' }}>
+                    {'"email"'}:
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-4 py-3 rounded-sm font-mono text-sm outline-none transition-colors duration-300 focus:border-[#00e87b]"
+                    style={{
+                      backgroundColor: '#111111',
+                      border: '1px solid #1a1a1a',
+                      color: '#e8e8e8',
+                    }}
+                    placeholder="email@exemplo.com"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-mono text-xs mb-2" style={{ color: '#4a4a4a' }}>
+                    {'"subject"'}:
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    className="w-full px-4 py-3 rounded-sm font-mono text-sm outline-none transition-colors duration-300 focus:border-[#00e87b]"
+                    style={{
+                      backgroundColor: '#111111',
+                      border: '1px solid #1a1a1a',
+                      color: '#e8e8e8',
+                    }}
+                    placeholder="Sobre o que é?"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-mono text-xs mb-2" style={{ color: '#4a4a4a' }}>
+                    {'"message"'}:
+                  </label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-3 rounded-sm font-mono text-sm outline-none transition-colors duration-300 resize-none focus:border-[#00e87b]"
+                    style={{
+                      backgroundColor: '#111111',
+                      border: '1px solid #1a1a1a',
+                      color: '#e8e8e8',
+                    }}
+                    placeholder="Descreva seu projeto..."
+                  />
+                </div>
+
                 <button
                   type="submit"
-                  className="w-full py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-green-500/25"
+                  disabled={status === 'sending'}
+                  className="w-full py-3 font-mono text-sm uppercase tracking-widest transition-all duration-300 hover:opacity-90 disabled:opacity-50"
+                  style={{ backgroundColor: '#00e87b', color: '#060606', borderRadius: '2px' }}
+                  data-cursor-hover
                 >
-                  <Send className="w-5 h-5" />
-                  {t('sendWhatsApp')}
+                  {status === 'idle' && '→ Enviar Request'}
+                  {status === 'sending' && '⟳ Enviando...'}
+                  {status === 'sent' && '✓ Enviado via WhatsApp'}
+                  {status === 'error' && '✗ Erro — tente novamente'}
                 </button>
               </form>
-            </motion.div>
-          </div>
+
+              {/* Response preview */}
+              {status === 'sent' && (
+                <div className="px-6 py-4" style={{ borderTop: '1px solid #1a1a1a', backgroundColor: '#0a0a0a' }}>
+                  <div className="font-mono text-xs" style={{ color: '#00e87b' }}>
+                    {'// 200 OK — Mensagem aberta no WhatsApp'}
+                  </div>
+                </div>
+              )}
+            </div>
+          </motion.div>
+
+          {/* Right: Direct contact info */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col justify-between"
+          >
+            <div className="space-y-8">
+              <p className="text-lg leading-relaxed" style={{ color: '#737373' }}>
+                Disponível para projetos freelance, consultoria técnica e parcerias.
+                Trabalho 100% remoto com clientes no{' '}
+                <span style={{ color: '#e8e8e8' }}>Brasil, Portugal e internacional</span>.
+              </p>
+
+              <div className="space-y-4">
+                {[
+                  {
+                    label: 'Email',
+                    value: 'gabrielbarreto900@gmail.com',
+                    href: 'mailto:gabrielbarreto900@gmail.com',
+                  },
+                  {
+                    label: 'WhatsApp',
+                    value: '+351 969 318 391',
+                    href: 'https://wa.me/351969318391',
+                  },
+                  {
+                    label: 'LinkedIn',
+                    value: 'Gabriel Barreto',
+                    href: 'https://linkedin.com/in/gabriel-barreto-610a72370',
+                  },
+                  {
+                    label: 'GitHub',
+                    value: 'gab01012025',
+                    href: 'https://github.com/gab01012025',
+                  },
+                ].map((contact) => (
+                  <a
+                    key={contact.label}
+                    href={contact.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between py-3 transition-all duration-300"
+                    style={{ borderBottom: '1px solid #1a1a1a' }}
+                    data-cursor-hover
+                    onMouseEnter={(e) => { e.currentTarget.style.borderBottomColor = '#00e87b'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderBottomColor = '#1a1a1a'; }}
+                  >
+                    <div>
+                      <div className="font-mono text-xs uppercase tracking-wider mb-1" style={{ color: '#4a4a4a' }}>
+                        {contact.label}
+                      </div>
+                      <div className="text-sm transition-colors duration-300 group-hover:text-[#00e87b]" style={{ color: '#e8e8e8' }}>
+                        {contact.value}
+                      </div>
+                    </div>
+                    <svg
+                      className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                      style={{ color: '#4a4a4a' }}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={1.5}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Location */}
+            <div className="mt-12 p-4 rounded-sm" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full status-dot" style={{ backgroundColor: '#00e87b' }} />
+                <span className="font-mono text-xs" style={{ color: '#737373' }}>
+                  Lisboa, Portugal 🇵🇹 — Disponível para projetos remotos
+                </span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
-  )
+  );
 }
-
-export default Contact

@@ -1,95 +1,55 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react'
-import { useTranslation } from '@/hooks/useTranslation'
+import { motion } from 'framer-motion';
 
-const Footer = () => {
-  const { t } = useTranslation()
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const socialLinks = [
-    { icon: Github, href: 'https://github.com/gab01012025', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com/in/gabriel-barreto-610a72370', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:gabrielbarreto900@gmail.com', label: 'Email' },
-  ]
+export default function Footer() {
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-950 border-t border-slate-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <a href="#" className="text-2xl font-bold text-white mb-4 inline-block">
-              GB<span className="text-emerald-400">.</span>
-            </a>
-            <p className="text-slate-400 text-sm max-w-sm mb-4">
-              {t('footerDescription')}
-            </p>
-            <p className="text-slate-500 text-sm">
-              {t('lisbon')} 🇵🇹
-            </p>
+    <footer className="relative px-6 lg:px-12 py-12" style={{ borderTop: '1px solid #1a1a1a' }}>
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+          {/* Left */}
+          <div className="flex items-center gap-6">
+            <span className="font-mono text-sm tracking-widest" style={{ color: '#00e87b' }}>
+              GB<span style={{ color: '#737373' }}>.dev</span>
+            </span>
+            <span className="font-mono text-xs" style={{ color: '#4a4a4a' }}>
+              &copy; {currentYear}
+            </span>
           </div>
 
-          {/* Navigation */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">{t('navigation')}</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">{t('home')}</a></li>
-              <li><a href="#about" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">{t('about')}</a></li>
-              <li><a href="#projects" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">{t('projects')}</a></li>
-              <li><a href="#contact" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">{t('contact')}</a></li>
-            </ul>
-          </div>
+          {/* Center */}
+          <motion.div
+            className="font-mono text-xs"
+            style={{ color: '#4a4a4a' }}
+            whileHover={{ color: '#00e87b' }}
+          >
+            Projetado e desenvolvido por Gabriel Barreto
+          </motion.div>
 
-          {/* Services */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">{t('servicesFooter')}</h4>
-            <ul className="space-y-2">
-              <li><span className="text-slate-400 text-sm">{t('crmIntegrations')}</span></li>
-              <li><span className="text-slate-400 text-sm">{t('restApis')}</span></li>
-              <li><span className="text-slate-400 text-sm">{t('telegramBots')}</span></li>
-              <li><span className="text-slate-400 text-sm">{t('automations')}</span></li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom */}
-        <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-slate-500 text-sm">
-            © {new Date().getFullYear()} Gabriel Barreto. {t('allRightsReserved')}.
-          </p>
-          
+          {/* Right - Social */}
           <div className="flex items-center gap-4">
-            {socialLinks.map((social) => (
+            {[
+              { label: 'GitHub', href: 'https://github.com/gab01012025' },
+              { label: 'LinkedIn', href: 'https://linkedin.com/in/gabriel-barreto-610a72370' },
+              { label: 'Email', href: 'mailto:gabrielbarreto900@gmail.com' },
+            ].map((link) => (
               <a
-                key={social.label}
-                href={social.href}
+                key={link.label}
+                href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-slate-800/50 hover:bg-emerald-500/20 border border-slate-700 hover:border-emerald-500/50 rounded-lg flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-all"
-                aria-label={social.label}
+                className="font-mono text-xs uppercase tracking-widest transition-colors duration-300 hover:text-[#00e87b]"
+                style={{ color: '#4a4a4a' }}
+                data-cursor-hover
               >
-                <social.icon className="w-5 h-5" />
+                {link.label}
               </a>
             ))}
-            
-            <motion.button
-              onClick={scrollToTop}
-              whileHover={{ y: -3 }}
-              className="w-10 h-10 bg-emerald-500 hover:bg-emerald-600 rounded-lg flex items-center justify-center text-white transition-all"
-              aria-label={t('backToTop')}
-            >
-              <ArrowUp className="w-5 h-5" />
-            </motion.button>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }
-
-export default Footer

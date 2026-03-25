@@ -1,35 +1,46 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { LanguageProvider } from "@/context/LanguageContext";
 
 const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Gabriel Barreto | Backend Developer & Integrações",
-  description: "Desenvolvedor backend freelancer em Lisboa. APIs REST, integrações de sistemas, webhooks, bots e automações. Node.js, Python, MongoDB.",
-  keywords: ["backend developer", "freelancer", "Node.js", "Python", "API", "integrações", "Lisboa", "Portugal", "webhooks", "automações"],
+  title: "Gabriel Barreto — Backend Developer",
+  description:
+    "Desenvolvedor backend especializado em APIs, integrações e arquiteturas escaláveis. Node.js, Python, TypeScript. Lisboa, Portugal.",
+  keywords: [
+    "desenvolvedor backend",
+    "Node.js",
+    "Python",
+    "TypeScript",
+    "APIs",
+    "integrações",
+    "freelancer",
+    "Portugal",
+  ],
   authors: [{ name: "Gabriel Barreto" }],
-  creator: "Gabriel Barreto",
   openGraph: {
+    title: "Gabriel Barreto — Backend Developer",
+    description:
+      "APIs, integrações e arquiteturas escaláveis. Do zero à produção.",
     type: "website",
-    locale: "pt_PT",
-    url: "https://gabrielbarreto.vercel.app",
-    siteName: "Gabriel Barreto",
-    title: "Gabriel Barreto | Backend Developer & Integrações",
-    description: "APIs, integrações de sistemas e automações para o seu negócio.",
+    locale: "pt_BR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gabriel Barreto | Backend Developer",
-    description: "APIs, integrações e automações",
-  },
-  robots: {
-    index: true,
-    follow: true,
+    title: "Gabriel Barreto — Backend Developer",
+    description:
+      "APIs, integrações e arquiteturas escaláveis. Do zero à produção.",
   },
 };
 
@@ -39,16 +50,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt" className="scroll-smooth dark">
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#0f172a" />
-      </head>
-      <body className={`${inter.className} antialiased bg-slate-950 text-slate-100`}>
-        <LanguageProvider>
-          {children}
-        </LanguageProvider>
+    <html lang="pt-BR" className={`${inter.variable} ${jetbrains.variable} antialiased`}>
+      <body
+        className="min-h-screen"
+        style={{ backgroundColor: "#060606", color: "#e8e8e8" }}
+      >
+        {children}
       </body>
     </html>
   );
