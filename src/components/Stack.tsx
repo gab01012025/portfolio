@@ -2,10 +2,19 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
+import type { TranslationKey } from '@/lib/i18n';
 
-const STACK_CATEGORIES = [
+interface StackCategory {
+  titleKey?: TranslationKey;
+  titleStatic?: string;
+  icon: string;
+  items: { name: string; level: string }[];
+}
+
+const STACK_CATEGORIES: StackCategory[] = [
   {
-    title: 'Backend & Runtime',
+    titleStatic: 'Backend & Runtime',
     icon: '⚡',
     items: [
       { name: 'Node.js', level: 'primary' },
@@ -17,7 +26,7 @@ const STACK_CATEGORIES = [
     ],
   },
   {
-    title: 'Frontend & UI',
+    titleStatic: 'Frontend & UI',
     icon: '◆',
     items: [
       { name: 'Next.js 15', level: 'primary' },
@@ -28,7 +37,7 @@ const STACK_CATEGORIES = [
     ],
   },
   {
-    title: 'Databases',
+    titleStatic: 'Databases',
     icon: '▣',
     items: [
       { name: 'PostgreSQL', level: 'primary' },
@@ -40,7 +49,7 @@ const STACK_CATEGORIES = [
     ],
   },
   {
-    title: 'DevOps & Cloud',
+    titleStatic: 'DevOps & Cloud',
     icon: '☁',
     items: [
       { name: 'Docker', level: 'primary' },
@@ -51,7 +60,7 @@ const STACK_CATEGORIES = [
     ],
   },
   {
-    title: 'Integrações & APIs',
+    titleKey: 'stack.integrations',
     icon: '⟷',
     items: [
       { name: 'REST APIs', level: 'primary' },
@@ -63,7 +72,7 @@ const STACK_CATEGORIES = [
     ],
   },
   {
-    title: 'Ferramentas',
+    titleKey: 'stack.tools',
     icon: '⌘',
     items: [
       { name: 'Git/GitHub', level: 'primary' },
@@ -79,11 +88,13 @@ function StackCard({
   category,
   index,
 }: {
-  category: (typeof STACK_CATEGORIES)[0];
+  category: StackCategory;
   index: number;
 }) {
+  const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const title = category.titleKey ? t(category.titleKey) : category.titleStatic!;
 
   return (
     <motion.div
@@ -97,7 +108,7 @@ function StackCard({
       <div className="flex items-center gap-3 mb-4">
         <span className="text-lg">{category.icon}</span>
         <h3 className="font-mono text-xs uppercase tracking-widest" style={{ color: '#e8e8e8' }}>
-          {category.title}
+          {title}
         </h3>
       </div>
 
@@ -121,6 +132,7 @@ function StackCard({
 }
 
 export default function Stack() {
+  const { t } = useLanguage();
   const headerRef = useRef<HTMLDivElement>(null);
   const isHeaderInView = useInView(headerRef, { once: true, margin: '-100px' });
 
@@ -137,17 +149,16 @@ export default function Stack() {
             transition={{ duration: 0.6 }}
           >
             <span className="font-mono text-xs tracking-[0.3em] uppercase block mb-4" style={{ color: '#00e87b' }}>
-              {'// Stack'}
+              {t('stack.tag')}
             </span>
             <h2
               className="text-4xl lg:text-5xl font-bold tracking-tight mb-4"
               style={{ color: '#e8e8e8' }}
             >
-              Ferramentas do ofício
+              {t('stack.title')}
             </h2>
             <p className="max-w-xl text-base" style={{ color: '#737373' }}>
-              Sem barras de progresso fictícias. Estas são as tecnologias que uso
-              diariamente em projetos reais de produção.
+              {t('stack.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -156,7 +167,7 @@ export default function Stack() {
       {/* Grid */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {STACK_CATEGORIES.map((category, i) => (
-          <StackCard key={category.title} category={category} index={i} />
+          <StackCard key={category.titleKey ?? category.titleStatic} category={category} index={i} />
         ))}
       </div>
 

@@ -1,8 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -25,7 +27,7 @@ export default function Footer() {
             style={{ color: '#4a4a4a' }}
             whileHover={{ color: '#00e87b' }}
           >
-            Projetado e desenvolvido por Gabriel Barreto
+            {t('footer.credit')}
           </motion.div>
 
           {/* Right - Social */}

@@ -2,8 +2,10 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Hero() {
+  const { t } = useLanguage();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -39,7 +41,7 @@ export default function Hero() {
         >
           <div className="w-2 h-2 rounded-full status-dot" style={{ backgroundColor: '#00e87b' }} />
           <span className="font-mono text-xs tracking-[0.2em] uppercase" style={{ color: '#737373' }}>
-            Backend Developer &mdash; Lisboa, Portugal
+            {t('hero.role')}
           </span>
         </motion.div>
 
@@ -70,9 +72,9 @@ export default function Hero() {
           transition={{ delay: 1.8, duration: 0.6 }}
         >
           <p className="text-lg leading-relaxed" style={{ color: '#737373' }}>
-            Construo a engenharia invisível que faz sistemas funcionarem.{' '}
-            <span style={{ color: '#e8e8e8' }}>APIs, integrações, automações</span>{' '}
-            e arquiteturas que escalam — do zero à produção.
+            {t('hero.description.1')}
+            <span style={{ color: '#e8e8e8' }}>{t('hero.description.highlight')}</span>
+            {t('hero.description.2')}
           </p>
         </motion.div>
 
@@ -93,7 +95,7 @@ export default function Hero() {
             style={{ backgroundColor: '#00e87b', color: '#060606', borderRadius: '2px' }}
             data-cursor-hover
           >
-            <span className="relative z-10">Ver Projetos</span>
+            <span className="relative z-10">{t('hero.cta.projects')}</span>
             <svg className="w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -109,7 +111,7 @@ export default function Hero() {
             style={{ borderColor: '#2a2a2a', color: '#737373', borderRadius: '2px' }}
             data-cursor-hover
           >
-            Fale Comigo
+            {t('hero.cta.contact')}
           </a>
         </motion.div>
 
@@ -121,9 +123,9 @@ export default function Hero() {
           transition={{ delay: 2.3, duration: 0.8 }}
         >
           {[
-            { value: '20+', label: 'Projetos Entregues' },
-            { value: '3+', label: 'Anos de Código' },
-            { value: '<24h', label: 'Tempo de Resposta' },
+            { value: '20+', label: t('hero.stat.projects') },
+            { value: '3+', label: t('hero.stat.years') },
+            { value: '<24h', label: t('hero.stat.response') },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col">
               <span className="text-2xl font-bold font-mono" style={{ color: '#00e87b' }}>

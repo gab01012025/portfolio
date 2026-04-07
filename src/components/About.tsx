@@ -2,42 +2,28 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-
-const FACTS = [
-  { label: 'const location', value: '"Lisboa, Portugal 🇵🇹"' },
-  { label: 'const focus', value: '"Backend & Integrações"' },
-  { label: 'const experience', value: '"3+ anos construindo sistemas"' },
-  { label: 'const approach', value: '"Código limpo, entrega rápida"' },
-  { label: 'const tools', value: '"100% GitHub Copilot Pro"' },
-  { label: 'const available', value: 'true' },
-];
-
-const PRINCIPLES = [
-  {
-    number: '01',
-    title: 'Zero bullshit',
-    description: 'Comunicação direta, prazos realistas, sem enrolação. Se algo não faz sentido, eu digo.',
-  },
-  {
-    number: '02',
-    title: 'Código > Conversa',
-    description: 'Prefiro mostrar resultado a fazer reunião. O código fala por si.',
-  },
-  {
-    number: '03',
-    title: 'Produção first',
-    description: 'Tudo que construo roda em produção. Docker, CI/CD, monitoramento — do primeiro dia.',
-  },
-  {
-    number: '04',
-    title: 'Entrega completa',
-    description: 'Não entrego "quase pronto". Documentação, testes, deploy — tudo incluso.',
-  },
-];
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function About() {
+  const { t } = useLanguage();
   const headerRef = useRef<HTMLDivElement>(null);
   const isHeaderInView = useInView(headerRef, { once: true, margin: '-100px' });
+
+  const FACTS = [
+    { label: 'const location', value: '"Lisboa, Portugal 🇵🇹"' },
+    { label: 'const focus', value: t('about.fact.focus') },
+    { label: 'const experience', value: t('about.fact.experience') },
+    { label: 'const approach', value: t('about.fact.approach') },
+    { label: 'const tools', value: t('about.fact.tools') },
+    { label: 'const available', value: 'true' },
+  ];
+
+  const PRINCIPLES = [
+    { number: '01', title: t('about.principle.1.title'), description: t('about.principle.1.desc') },
+    { number: '02', title: t('about.principle.2.title'), description: t('about.principle.2.desc') },
+    { number: '03', title: t('about.principle.3.title'), description: t('about.principle.3.desc') },
+    { number: '04', title: t('about.principle.4.title'), description: t('about.principle.4.desc') },
+  ];
 
   return (
     <section id="about" className="relative py-32 px-6 lg:px-12">
@@ -51,10 +37,10 @@ export default function About() {
             transition={{ duration: 0.6 }}
           >
             <span className="font-mono text-xs tracking-[0.3em] uppercase block mb-4" style={{ color: '#00e87b' }}>
-              {'// Sobre'}
+              {t('about.tag')}
             </span>
             <h2 className="text-4xl lg:text-5xl font-bold tracking-tight mb-4" style={{ color: '#e8e8e8' }}>
-              Quem tá por trás do código
+              {t('about.title')}
             </h2>
           </motion.div>
         </div>
@@ -112,14 +98,12 @@ export default function About() {
             {/* Bio text below terminal */}
             <div className="mt-8">
               <p className="text-base leading-relaxed" style={{ color: '#737373' }}>
-                Desenvolvedor backend focado em resolver problemas reais com código que funciona.
-                Trabalho com clientes do Brasil, Portugal e internacional, construindo desde
-                APIs simples até sistemas complexos com múltiplas integrações.
+                {t('about.bio.1')}
               </p>
               <p className="text-base leading-relaxed mt-4" style={{ color: '#737373' }}>
-                Meu processo é direto:{' '}
-                <span style={{ color: '#e8e8e8' }}>entender o problema → desenhar a solução → entregar funcionando</span>.
-                Sem frameworks da moda desnecessários, sem overengineering — só o que o projeto precisa.
+                {t('about.bio.2.start')}
+                <span style={{ color: '#e8e8e8' }}>{t('about.bio.2.highlight')}</span>
+                {t('about.bio.2.end')}
               </p>
             </div>
           </motion.div>
@@ -158,7 +142,7 @@ export default function About() {
               style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}
             >
               <div className="font-mono text-xs uppercase tracking-widest mb-3" style={{ color: '#4a4a4a' }}>
-                Links rápidos
+                {t('about.links')}
               </div>
               <div className="flex flex-wrap gap-3">
                 {[

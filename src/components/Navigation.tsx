@@ -2,25 +2,35 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
+import type { Locale } from '@/lib/i18n';
 
-const NAV_ITEMS = [
-  { label: 'Início', href: '#hero' },
-  { label: 'Projetos', href: '#projects' },
-  { label: 'Stack', href: '#stack' },
-  { label: 'Sobre', href: '#about' },
-  { label: 'Contato', href: '#contact' },
+const LANG_OPTIONS: { code: Locale; flag: string }[] = [
+  { code: 'pt', flag: '🇧🇷' },
+  { code: 'en', flag: '🇺🇸' },
+  { code: 'es', flag: '🇪🇸' },
 ];
 
 export default function Navigation() {
+  const { t, locale, setLocale } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [langOpen, setLangOpen] = useState(false);
+
+  const NAV_ITEMS = [
+    { label: t('nav.home'), href: '#hero' },
+    { label: t('nav.projects'), href: '#projects' },
+    { label: t('nav.stack'), href: '#stack' },
+    { label: t('nav.about'), href: '#about' },
+    { label: t('nav.contact'), href: '#contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      const sections = NAV_ITEMS.map((item) => item.href.replace('#', ''));
+      const sections = ['hero', 'projects', 'stack', 'about', 'contact'];
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
         if (el) {
@@ -48,7 +58,7 @@ export default function Navigation() {
       {/* Desktop nav - Minimal side dots */}
       <nav
         className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-end gap-4"
-        aria-label="Navegação principal"
+        aria-label="Navigation"
       >
         {NAV_ITEMS.map((item) => (
           <button
@@ -105,36 +115,114 @@ export default function Navigation() {
             GB<span style={{ color: '#737373' }}>.dev</span>
           </a>
 
-          <div className="hidden lg:flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full status-dot" style={{ backgroundColor: '#00e87b' }} />
-            <span className="font-mono text-xs" style={{ color: '#737373' }}>
-              disponível para projetos
-            </span>
+          <div className="hidden lg:flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full status-dot" style={{ backgroundColor: '#00e87b' }} />
+              <span className="font-mono text-xs" style={{ color: '#737373' }}>
+                {t('nav.available')}
+              </span>
+            </div>
+
+            {/* Language switcher */}
+            <div className="relative ml-2">
+              <button
+                onClick={() => setLangOpen(!langOpen)}
+                className="flex items-center gap-1.5 px-2 py-1 rounded-sm font-mono text-xs uppercase tracking-wider transition-colors duration-300 hover:text-[#00e87b]"
+                style={{ color: '#737373', border: '1px solid #1a1a1a' }}
+                data-cursor-hover
+              >
+                {LANG_OPTIONS.find((l) => l.code === locale)?.flag}{' '}
+                {locale.toUpperCase()}
+              </button>
+              <AnimatePresence>
+                {langOpen && (
+                  <motion.div
+                    className="absolute right-0 top-full mt-1 rounded-sm overflow-hidden"
+                    style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    {LANG_OPTIONS.filter((l) => l.code !== locale).map((l) => (
+                      <button
+                        key={l.code}
+                        onClick={() => { setLocale(l.code); setLangOpen(false); }}
+                        className="flex items-center gap-2 w-full px-3 py-2 font-mono text-xs uppercase tracking-wider transition-colors duration-200 hover:bg-[#111111] hover:text-[#00e87b]"
+                        style={{ color: '#737373' }}
+                        data-cursor-hover
+                      >
+                        {l.flag} {l.code.toUpperCase()}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="lg:hidden flex flex-col gap-1.5 p-2"
-            onClick={() => setIsOpen(!isOpen)}
-            data-cursor-hover
-            aria-label="Menu"
-          >
-            <motion.span
-              className="block w-6 h-[1.5px]"
-              style={{ backgroundColor: '#e8e8e8' }}
-              animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 6 : 0 }}
-            />
-            <motion.span
-              className="block w-6 h-[1.5px]"
-              style={{ backgroundColor: '#e8e8e8' }}
-              animate={{ opacity: isOpen ? 0 : 1 }}
-            />
-            <motion.span
-              className="block w-6 h-[1.5px]"
-              style={{ backgroundColor: '#e8e8e8' }}
-              animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -6 : 0 }}
-            />
-          </button>
+          {/* Mobile: lang + menu */}
+          <div className="lg:hidden flex items-center gap-3">
+            {/* Mobile lang switcher */}
+            <div className="relative">
+              <button
+                onClick={() => setLangOpen(!langOpen)}
+                className="flex items-center gap-1 px-2 py-1 rounded-sm font-mono text-xs"
+                style={{ color: '#737373', border: '1px solid #1a1a1a' }}
+                data-cursor-hover
+              >
+                {LANG_OPTIONS.find((l) => l.code === locale)?.flag}
+              </button>
+              <AnimatePresence>
+                {langOpen && (
+                  <motion.div
+                    className="absolute right-0 top-full mt-1 rounded-sm overflow-hidden"
+                    style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a', zIndex: 60 }}
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    {LANG_OPTIONS.filter((l) => l.code !== locale).map((l) => (
+                      <button
+                        key={l.code}
+                        onClick={() => { setLocale(l.code); setLangOpen(false); }}
+                        className="flex items-center gap-2 w-full px-3 py-2 font-mono text-xs"
+                        style={{ color: '#737373' }}
+                        data-cursor-hover
+                      >
+                        {l.flag} {l.code.toUpperCase()}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Mobile menu button */}
+            <button
+              className="flex flex-col gap-1.5 p-2"
+              onClick={() => setIsOpen(!isOpen)}
+              data-cursor-hover
+              aria-label="Menu"
+            >
+              <motion.span
+                className="block w-6 h-[1.5px]"
+                style={{ backgroundColor: '#e8e8e8' }}
+                animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 6 : 0 }}
+              />
+              <motion.span
+                className="block w-6 h-[1.5px]"
+                style={{ backgroundColor: '#e8e8e8' }}
+                animate={{ opacity: isOpen ? 0 : 1 }}
+              />
+              <motion.span
+                className="block w-6 h-[1.5px]"
+                style={{ backgroundColor: '#e8e8e8' }}
+                animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -6 : 0 }}
+              />
+            </button>
+          </div>
         </div>
       </motion.header>
 

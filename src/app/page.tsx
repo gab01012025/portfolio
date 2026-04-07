@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import { LanguageProvider } from '@/context/LanguageContext';
 import Preloader from '@/components/Preloader';
 import CustomCursor from '@/components/CustomCursor';
 import Navigation from '@/components/Navigation';
@@ -19,7 +20,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <LanguageProvider>
       {!isLoaded && <Preloader onComplete={handlePreloaderComplete} />}
       <CustomCursor />
       <div className="noise-overlay" />
@@ -37,6 +38,6 @@ export default function Home() {
           <Footer />
         </>
       )}
-    </>
+    </LanguageProvider>
   );
 }

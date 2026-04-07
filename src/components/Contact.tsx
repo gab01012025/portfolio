@@ -2,8 +2,10 @@
 
 import { useRef, useState, FormEvent } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Contact() {
+  const { t } = useLanguage();
   const headerRef = useRef<HTMLDivElement>(null);
   const isHeaderInView = useInView(headerRef, { once: true, margin: '-100px' });
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -13,9 +15,12 @@ export default function Contact() {
     e.preventDefault();
     setStatus('sending');
 
-    // Build WhatsApp message
     const phone = '351969318391';
-    const text = `*Nova mensagem do portfólio*%0A%0A*Nome:* ${formData.name}%0A*Email:* ${formData.email}%0A*Assunto:* ${formData.subject}%0A%0A*Mensagem:*%0A${formData.message}`;
+    const text = t('contact.whatsapp.msg')
+      .replace('{name}', formData.name)
+      .replace('{email}', formData.email)
+      .replace('{subject}', formData.subject)
+      .replace('{message}', formData.message);
     window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
     setStatus('sent');
     setTimeout(() => setStatus('idle'), 3000);
@@ -33,11 +38,11 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
           >
             <span className="font-mono text-xs tracking-[0.3em] uppercase block mb-4" style={{ color: '#00e87b' }}>
-              {'// Contato'}
+              {t('contact.tag')}
             </span>
             <h2 className="text-4xl lg:text-6xl font-bold tracking-tight mb-4" style={{ color: '#e8e8e8' }}>
-              Tem um projeto?<br />
-              <span style={{ color: '#00e87b' }}>Vamos conversar.</span>
+              {t('contact.title.1')}<br />
+              <span style={{ color: '#00e87b' }}>{t('contact.title.2')}</span>
             </h2>
           </motion.div>
         </div>
@@ -81,7 +86,7 @@ export default function Contact() {
                       border: '1px solid #1a1a1a',
                       color: '#e8e8e8',
                     }}
-                    placeholder="Seu nome"
+                    placeholder={t('contact.placeholder.name')}
                   />
                 </div>
 
@@ -100,7 +105,7 @@ export default function Contact() {
                       border: '1px solid #1a1a1a',
                       color: '#e8e8e8',
                     }}
-                    placeholder="email@exemplo.com"
+                    placeholder={t('contact.placeholder.email')}
                   />
                 </div>
 
@@ -119,7 +124,7 @@ export default function Contact() {
                       border: '1px solid #1a1a1a',
                       color: '#e8e8e8',
                     }}
-                    placeholder="Sobre o que é?"
+                    placeholder={t('contact.placeholder.subject')}
                   />
                 </div>
 
@@ -138,7 +143,7 @@ export default function Contact() {
                       border: '1px solid #1a1a1a',
                       color: '#e8e8e8',
                     }}
-                    placeholder="Descreva seu projeto..."
+                    placeholder={t('contact.placeholder.message')}
                   />
                 </div>
 
@@ -149,10 +154,10 @@ export default function Contact() {
                   style={{ backgroundColor: '#00e87b', color: '#060606', borderRadius: '2px' }}
                   data-cursor-hover
                 >
-                  {status === 'idle' && '→ Enviar Request'}
-                  {status === 'sending' && '⟳ Enviando...'}
-                  {status === 'sent' && '✓ Enviado via WhatsApp'}
-                  {status === 'error' && '✗ Erro — tente novamente'}
+                  {status === 'idle' && t('contact.btn.idle')}
+                  {status === 'sending' && t('contact.btn.sending')}
+                  {status === 'sent' && t('contact.btn.sent')}
+                  {status === 'error' && t('contact.btn.error')}
                 </button>
               </form>
 
@@ -160,7 +165,7 @@ export default function Contact() {
               {status === 'sent' && (
                 <div className="px-6 py-4" style={{ borderTop: '1px solid #1a1a1a', backgroundColor: '#0a0a0a' }}>
                   <div className="font-mono text-xs" style={{ color: '#00e87b' }}>
-                    {'// 200 OK — Mensagem aberta no WhatsApp'}
+                    {t('contact.response')}
                   </div>
                 </div>
               )}
@@ -177,9 +182,8 @@ export default function Contact() {
           >
             <div className="space-y-8">
               <p className="text-lg leading-relaxed" style={{ color: '#737373' }}>
-                Disponível para projetos freelance, consultoria técnica e parcerias.
-                Trabalho 100% remoto com clientes no{' '}
-                <span style={{ color: '#e8e8e8' }}>Brasil, Portugal e internacional</span>.
+                {t('contact.availability')}
+                <span style={{ color: '#e8e8e8' }}>{t('contact.availability.highlight')}</span>.
               </p>
 
               <div className="space-y-4">
@@ -244,7 +248,7 @@ export default function Contact() {
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full status-dot" style={{ backgroundColor: '#00e87b' }} />
                 <span className="font-mono text-xs" style={{ color: '#737373' }}>
-                  Lisboa, Portugal 🇵🇹 — Disponível para projetos remotos
+                  {t('contact.location')}
                 </span>
               </div>
             </div>

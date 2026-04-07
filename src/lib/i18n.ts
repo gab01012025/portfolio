@@ -1,0 +1,366 @@
+export type Locale = 'pt' | 'en' | 'es';
+
+export const translations = {
+  pt: {
+    // Navigation
+    'nav.home': 'Início',
+    'nav.projects': 'Projetos',
+    'nav.stack': 'Stack',
+    'nav.about': 'Sobre',
+    'nav.contact': 'Contato',
+    'nav.available': 'disponível para projetos',
+
+    // Hero
+    'hero.role': 'Backend Developer — Lisboa, Portugal',
+    'hero.description.1': 'Construo a engenharia invisível que faz sistemas funcionarem. ',
+    'hero.description.highlight': 'APIs, integrações, automações',
+    'hero.description.2': ' e arquiteturas que escalam — do zero à produção.',
+    'hero.cta.projects': 'Ver Projetos',
+    'hero.cta.contact': 'Fale Comigo',
+    'hero.stat.projects': 'Projetos Entregues',
+    'hero.stat.years': 'Anos de Código',
+    'hero.stat.response': 'Tempo de Resposta',
+
+    // Projects
+    'projects.tag': '// Projetos',
+    'projects.title': 'Trabalhos selecionados',
+    'projects.subtitle': 'Sistemas reais em produção — de plataformas gov a CRMs com IA, de apps mobile a integrações que processam dados em tempo real.',
+    'projects.github': 'Ver mais no GitHub →',
+    'projects.live': 'Ver ao vivo',
+    'projects.code': 'Código',
+
+    // Project items
+    'project.crm.subtitle': 'Sistema CRM completo com IA generativa',
+    'project.crm.description': 'CRM full-stack com inteligência artificial integrada via Gemini API para geração de respostas a objeções de vendas, busca inteligente de leads, e pipeline completo de gestão comercial.',
+    'project.crm.h1': 'IA para objeções de vendas',
+    'project.crm.h2': 'Radar de leads inteligente',
+    'project.crm.h3': 'Pipeline kanban completo',
+
+    'project.confea.subtitle': 'Hackathon — Plataforma gov de registro profissional',
+    'project.confea.description': 'Plataforma desenvolvida durante o CONFEA Open Day Hackathon para unificar o registro profissional de engenheiros no Brasil. Autenticação via GovBR, criação de ARTs assistida por IA, e sistema centralizado.',
+    'project.confea.h1': 'Login GovBR',
+    'project.confea.h2': 'Criação de ART com IA',
+    'project.confea.h3': 'Dashboard profissional',
+
+    'project.nymu.subtitle': 'App mobile para emissão de NF-e',
+    'project.nymu.description': 'Aplicação mobile completa em React Native/Expo para gestão de tomadores e emissão simulada de notas fiscais eletrônicas. Interface nativa com NativeWind e integração de workflows EAS.',
+    'project.nymu.h1': 'Emissão de NF-e',
+    'project.nymu.h2': 'Gestão de tomadores',
+    'project.nymu.h3': 'Build nativo iOS/Android',
+
+    'project.cooperfilme.subtitle': 'Sistema de gestão de roteiros com Docker',
+    'project.cooperfilme.description': 'Plataforma full-stack containerizada para gestão colaborativa de roteiros. Backend com Prisma ORM + PostgreSQL, frontend React, todo orquestrado via Docker Compose.',
+    'project.cooperfilme.h1': 'Docker Compose full',
+    'project.cooperfilme.h2': 'Prisma ORM',
+    'project.cooperfilme.h3': 'Workflow de roteiros',
+
+    'project.piperun.subtitle': 'Integração CRM → Conversions API',
+    'project.piperun.description': 'Webhook bridge que sincroniza automaticamente leads do CRM Piperun com a Meta Ads Conversions API (CAPI) para tracking de conversões offline. Containerizado com Docker.',
+    'project.piperun.h1': 'Conversões offline',
+    'project.piperun.h2': 'Webhook em tempo real',
+    'project.piperun.h3': 'Zero perda de dados',
+
+    'project.manto11.subtitle': 'E-commerce de camisas de futebol',
+    'project.manto11.description': 'E-commerce completo com catálogo de 700+ camisas, jogos ao vivo via API-Sports, pagamento via MercadoPago/PIX, sistema de favoritos, filtros avançados e pré-venda Copa 2026.',
+    'project.manto11.h1': 'Jogos ao vivo em tempo real',
+    'project.manto11.h2': '700+ produtos com foto real',
+    'project.manto11.h3': 'Pagamento PIX + parcelamento',
+
+    'project.beemed.subtitle': 'Plataforma de saúde digital',
+    'project.beemed.description': 'Plataforma web para o setor de saúde desenvolvida com Next.js e TypeScript. Interface para gestão de consultas médicas, formulários dinâmicos e painel profissional.',
+    'project.beemed.h1': 'Painel médico',
+    'project.beemed.h2': 'Formulários dinâmicos',
+    'project.beemed.h3': 'UI responsiva',
+
+    // Stack
+    'stack.tag': '// Stack',
+    'stack.title': 'Ferramentas do ofício',
+    'stack.subtitle': 'Sem barras de progresso fictícias. Estas são as tecnologias que uso diariamente em projetos reais de produção.',
+    'stack.integrations': 'Integrações & APIs',
+    'stack.tools': 'Ferramentas',
+
+    // About
+    'about.tag': '// Sobre',
+    'about.title': 'Quem tá por trás do código',
+    'about.fact.focus': '"Backend & Integrações"',
+    'about.fact.experience': '"3+ anos construindo sistemas"',
+    'about.fact.approach': '"Código limpo, entrega rápida"',
+    'about.fact.tools': '"100% GitHub Copilot Pro"',
+    'about.principle.1.title': 'Zero bullshit',
+    'about.principle.1.desc': 'Comunicação direta, prazos realistas, sem enrolação. Se algo não faz sentido, eu digo.',
+    'about.principle.2.title': 'Código > Conversa',
+    'about.principle.2.desc': 'Prefiro mostrar resultado a fazer reunião. O código fala por si.',
+    'about.principle.3.title': 'Produção first',
+    'about.principle.3.desc': 'Tudo que construo roda em produção. Docker, CI/CD, monitoramento — do primeiro dia.',
+    'about.principle.4.title': 'Entrega completa',
+    'about.principle.4.desc': 'Não entrego "quase pronto". Documentação, testes, deploy — tudo incluso.',
+    'about.links': 'Links rápidos',
+    'about.bio.1': 'Desenvolvedor backend focado em resolver problemas reais com código que funciona. Trabalho com clientes do Brasil, Portugal e internacional, construindo desde APIs simples até sistemas complexos com múltiplas integrações.',
+    'about.bio.2.start': 'Meu processo é direto: ',
+    'about.bio.2.highlight': 'entender o problema → desenhar a solução → entregar funcionando',
+    'about.bio.2.end': '. Sem frameworks da moda desnecessários, sem overengineering — só o que o projeto precisa.',
+
+    // Contact
+    'contact.tag': '// Contato',
+    'contact.title.1': 'Tem um projeto?',
+    'contact.title.2': 'Vamos conversar.',
+    'contact.placeholder.name': 'Seu nome',
+    'contact.placeholder.email': 'email@exemplo.com',
+    'contact.placeholder.subject': 'Sobre o que é?',
+    'contact.placeholder.message': 'Descreva seu projeto...',
+    'contact.btn.idle': '→ Enviar Request',
+    'contact.btn.sending': '⟳ Enviando...',
+    'contact.btn.sent': '✓ Enviado via WhatsApp',
+    'contact.btn.error': '✗ Erro — tente novamente',
+    'contact.response': '// 200 OK — Mensagem aberta no WhatsApp',
+    'contact.availability': 'Disponível para projetos freelance, consultoria técnica e parcerias. Trabalho 100% remoto com clientes no ',
+    'contact.availability.highlight': 'Brasil, Portugal e internacional',
+    'contact.location': 'Lisboa, Portugal 🇵🇹 — Disponível para projetos remotos',
+    'contact.whatsapp.msg': '*Nova mensagem do portfólio*%0A%0A*Nome:* {name}%0A*Email:* {email}%0A*Assunto:* {subject}%0A%0A*Mensagem:*%0A{message}',
+
+    // Footer
+    'footer.credit': 'Projetado e desenvolvido por Gabriel Barreto',
+  },
+  en: {
+    // Navigation
+    'nav.home': 'Home',
+    'nav.projects': 'Projects',
+    'nav.stack': 'Stack',
+    'nav.about': 'About',
+    'nav.contact': 'Contact',
+    'nav.available': 'available for projects',
+
+    // Hero
+    'hero.role': 'Backend Developer — Lisbon, Portugal',
+    'hero.description.1': 'I build the invisible engineering that makes systems work. ',
+    'hero.description.highlight': 'APIs, integrations, automations',
+    'hero.description.2': ' and architectures that scale — from zero to production.',
+    'hero.cta.projects': 'View Projects',
+    'hero.cta.contact': 'Get in Touch',
+    'hero.stat.projects': 'Projects Delivered',
+    'hero.stat.years': 'Years of Code',
+    'hero.stat.response': 'Response Time',
+
+    // Projects
+    'projects.tag': '// Projects',
+    'projects.title': 'Selected work',
+    'projects.subtitle': 'Real systems in production — from gov platforms to AI-powered CRMs, from mobile apps to integrations processing data in real time.',
+    'projects.github': 'See more on GitHub →',
+    'projects.live': 'Live demo',
+    'projects.code': 'Code',
+
+    // Project items
+    'project.crm.subtitle': 'Complete CRM system with generative AI',
+    'project.crm.description': 'Full-stack CRM with AI integrated via Gemini API for generating sales objection responses, intelligent lead search, and complete commercial pipeline management.',
+    'project.crm.h1': 'AI for sales objections',
+    'project.crm.h2': 'Smart lead radar',
+    'project.crm.h3': 'Full kanban pipeline',
+
+    'project.confea.subtitle': 'Hackathon — Gov platform for professional registration',
+    'project.confea.description': 'Platform built during CONFEA Open Day Hackathon to unify professional registration of engineers in Brazil. GovBR auth, AI-assisted ART creation, and centralized system.',
+    'project.confea.h1': 'GovBR login',
+    'project.confea.h2': 'AI-powered ART creation',
+    'project.confea.h3': 'Professional dashboard',
+
+    'project.nymu.subtitle': 'Mobile app for electronic invoice issuance',
+    'project.nymu.description': 'Complete mobile app in React Native/Expo for managing taxpayers and simulated electronic invoice issuance. Native interface with NativeWind and EAS workflow integration.',
+    'project.nymu.h1': 'Electronic invoice issuance',
+    'project.nymu.h2': 'Taxpayer management',
+    'project.nymu.h3': 'Native iOS/Android build',
+
+    'project.cooperfilme.subtitle': 'Script management system with Docker',
+    'project.cooperfilme.description': 'Containerized full-stack platform for collaborative script management. Backend with Prisma ORM + PostgreSQL, React frontend, all orchestrated via Docker Compose.',
+    'project.cooperfilme.h1': 'Full Docker Compose',
+    'project.cooperfilme.h2': 'Prisma ORM',
+    'project.cooperfilme.h3': 'Script workflow',
+
+    'project.piperun.subtitle': 'CRM → Conversions API Integration',
+    'project.piperun.description': 'Webhook bridge that automatically syncs leads from Piperun CRM with Meta Ads Conversions API (CAPI) for offline conversion tracking. Containerized with Docker.',
+    'project.piperun.h1': 'Offline conversions',
+    'project.piperun.h2': 'Real-time webhooks',
+    'project.piperun.h3': 'Zero data loss',
+
+    'project.manto11.subtitle': 'Football jersey e-commerce',
+    'project.manto11.description': 'Complete e-commerce with 700+ jersey catalog, live matches via API-Sports, MercadoPago/PIX payments, favorites system, advanced filters and 2026 World Cup pre-sale.',
+    'project.manto11.h1': 'Real-time live matches',
+    'project.manto11.h2': '700+ products with real photos',
+    'project.manto11.h3': 'PIX + installment payments',
+
+    'project.beemed.subtitle': 'Digital health platform',
+    'project.beemed.description': 'Web platform for the healthcare sector built with Next.js and TypeScript. Interface for medical appointment management, dynamic forms and professional dashboard.',
+    'project.beemed.h1': 'Medical dashboard',
+    'project.beemed.h2': 'Dynamic forms',
+    'project.beemed.h3': 'Responsive UI',
+
+    // Stack
+    'stack.tag': '// Stack',
+    'stack.title': 'Tools of the trade',
+    'stack.subtitle': 'No fake progress bars. These are the technologies I use daily in real production projects.',
+    'stack.integrations': 'Integrations & APIs',
+    'stack.tools': 'Tools',
+
+    // About
+    'about.tag': '// About',
+    'about.title': 'Who\'s behind the code',
+    'about.fact.focus': '"Backend & Integrations"',
+    'about.fact.experience': '"3+ years building systems"',
+    'about.fact.approach': '"Clean code, fast delivery"',
+    'about.fact.tools': '"100% GitHub Copilot Pro"',
+    'about.principle.1.title': 'Zero bullshit',
+    'about.principle.1.desc': 'Direct communication, realistic deadlines, no fluff. If something doesn\'t make sense, I say it.',
+    'about.principle.2.title': 'Code > Meetings',
+    'about.principle.2.desc': 'I\'d rather show results than sit in meetings. The code speaks for itself.',
+    'about.principle.3.title': 'Production first',
+    'about.principle.3.desc': 'Everything I build runs in production. Docker, CI/CD, monitoring — from day one.',
+    'about.principle.4.title': 'Complete delivery',
+    'about.principle.4.desc': 'I don\'t deliver "almost done". Documentation, tests, deploy — everything included.',
+    'about.links': 'Quick links',
+    'about.bio.1': 'Backend developer focused on solving real problems with code that works. I work with clients from Brazil, Portugal and internationally, building everything from simple APIs to complex systems with multiple integrations.',
+    'about.bio.2.start': 'My process is straightforward: ',
+    'about.bio.2.highlight': 'understand the problem → design the solution → deliver working',
+    'about.bio.2.end': '. No unnecessary trendy frameworks, no overengineering — just what the project needs.',
+
+    // Contact
+    'contact.tag': '// Contact',
+    'contact.title.1': 'Have a project?',
+    'contact.title.2': 'Let\'s talk.',
+    'contact.placeholder.name': 'Your name',
+    'contact.placeholder.email': 'email@example.com',
+    'contact.placeholder.subject': 'What is it about?',
+    'contact.placeholder.message': 'Describe your project...',
+    'contact.btn.idle': '→ Send Request',
+    'contact.btn.sending': '⟳ Sending...',
+    'contact.btn.sent': '✓ Sent via WhatsApp',
+    'contact.btn.error': '✗ Error — try again',
+    'contact.response': '// 200 OK — Message opened on WhatsApp',
+    'contact.availability': 'Available for freelance projects, technical consulting and partnerships. I work 100% remote with clients in ',
+    'contact.availability.highlight': 'Brazil, Portugal and worldwide',
+    'contact.location': 'Lisbon, Portugal 🇵🇹 — Available for remote projects',
+    'contact.whatsapp.msg': '*New message from portfolio*%0A%0A*Name:* {name}%0A*Email:* {email}%0A*Subject:* {subject}%0A%0A*Message:*%0A{message}',
+
+    // Footer
+    'footer.credit': 'Designed and developed by Gabriel Barreto',
+  },
+  es: {
+    // Navigation
+    'nav.home': 'Inicio',
+    'nav.projects': 'Proyectos',
+    'nav.stack': 'Stack',
+    'nav.about': 'Sobre mí',
+    'nav.contact': 'Contacto',
+    'nav.available': 'disponible para proyectos',
+
+    // Hero
+    'hero.role': 'Backend Developer — Lisboa, Portugal',
+    'hero.description.1': 'Construyo la ingeniería invisible que hace funcionar los sistemas. ',
+    'hero.description.highlight': 'APIs, integraciones, automatizaciones',
+    'hero.description.2': ' y arquitecturas que escalan — de cero a producción.',
+    'hero.cta.projects': 'Ver Proyectos',
+    'hero.cta.contact': 'Hablemos',
+    'hero.stat.projects': 'Proyectos Entregados',
+    'hero.stat.years': 'Años de Código',
+    'hero.stat.response': 'Tiempo de Respuesta',
+
+    // Projects
+    'projects.tag': '// Proyectos',
+    'projects.title': 'Trabajos seleccionados',
+    'projects.subtitle': 'Sistemas reales en producción — de plataformas gov a CRMs con IA, de apps mobile a integraciones que procesan datos en tiempo real.',
+    'projects.github': 'Ver más en GitHub →',
+    'projects.live': 'Ver en vivo',
+    'projects.code': 'Código',
+
+    // Project items
+    'project.crm.subtitle': 'Sistema CRM completo con IA generativa',
+    'project.crm.description': 'CRM full-stack con inteligencia artificial integrada vía Gemini API para generación de respuestas a objeciones de ventas, búsqueda inteligente de leads y pipeline completo de gestión comercial.',
+    'project.crm.h1': 'IA para objeciones de ventas',
+    'project.crm.h2': 'Radar de leads inteligente',
+    'project.crm.h3': 'Pipeline kanban completo',
+
+    'project.confea.subtitle': 'Hackathon — Plataforma gov de registro profesional',
+    'project.confea.description': 'Plataforma desarrollada durante el CONFEA Open Day Hackathon para unificar el registro profesional de ingenieros en Brasil. Autenticación vía GovBR, creación de ARTs asistida por IA y sistema centralizado.',
+    'project.confea.h1': 'Login GovBR',
+    'project.confea.h2': 'Creación de ART con IA',
+    'project.confea.h3': 'Dashboard profesional',
+
+    'project.nymu.subtitle': 'App mobile para emisión de factura electrónica',
+    'project.nymu.description': 'Aplicación mobile completa en React Native/Expo para gestión de contribuyentes y emisión simulada de facturas electrónicas. Interfaz nativa con NativeWind e integración de workflows EAS.',
+    'project.nymu.h1': 'Emisión de factura electrónica',
+    'project.nymu.h2': 'Gestión de contribuyentes',
+    'project.nymu.h3': 'Build nativo iOS/Android',
+
+    'project.cooperfilme.subtitle': 'Sistema de gestión de guiones con Docker',
+    'project.cooperfilme.description': 'Plataforma full-stack containerizada para gestión colaborativa de guiones. Backend con Prisma ORM + PostgreSQL, frontend React, todo orquestado vía Docker Compose.',
+    'project.cooperfilme.h1': 'Docker Compose completo',
+    'project.cooperfilme.h2': 'Prisma ORM',
+    'project.cooperfilme.h3': 'Workflow de guiones',
+
+    'project.piperun.subtitle': 'Integración CRM → Conversions API',
+    'project.piperun.description': 'Webhook bridge que sincroniza automáticamente leads del CRM Piperun con la Meta Ads Conversions API (CAPI) para tracking de conversiones offline. Containerizado con Docker.',
+    'project.piperun.h1': 'Conversiones offline',
+    'project.piperun.h2': 'Webhook en tiempo real',
+    'project.piperun.h3': 'Cero pérdida de datos',
+
+    'project.manto11.subtitle': 'E-commerce de camisetas de fútbol',
+    'project.manto11.description': 'E-commerce completo con catálogo de 700+ camisetas, partidos en vivo vía API-Sports, pago vía MercadoPago/PIX, sistema de favoritos, filtros avanzados y preventa Copa 2026.',
+    'project.manto11.h1': 'Partidos en vivo en tiempo real',
+    'project.manto11.h2': '700+ productos con foto real',
+    'project.manto11.h3': 'Pago PIX + cuotas',
+
+    'project.beemed.subtitle': 'Plataforma de salud digital',
+    'project.beemed.description': 'Plataforma web para el sector salud desarrollada con Next.js y TypeScript. Interfaz para gestión de consultas médicas, formularios dinámicos y panel profesional.',
+    'project.beemed.h1': 'Panel médico',
+    'project.beemed.h2': 'Formularios dinámicos',
+    'project.beemed.h3': 'UI responsiva',
+
+    // Stack
+    'stack.tag': '// Stack',
+    'stack.title': 'Herramientas del oficio',
+    'stack.subtitle': 'Sin barras de progreso ficticias. Estas son las tecnologías que uso diariamente en proyectos reales de producción.',
+    'stack.integrations': 'Integraciones & APIs',
+    'stack.tools': 'Herramientas',
+
+    // About
+    'about.tag': '// Sobre mí',
+    'about.title': 'Quién está detrás del código',
+    'about.fact.focus': '"Backend & Integraciones"',
+    'about.fact.experience': '"3+ años construyendo sistemas"',
+    'about.fact.approach': '"Código limpio, entrega rápida"',
+    'about.fact.tools': '"100% GitHub Copilot Pro"',
+    'about.principle.1.title': 'Zero bullshit',
+    'about.principle.1.desc': 'Comunicación directa, plazos realistas, sin rodeos. Si algo no tiene sentido, lo digo.',
+    'about.principle.2.title': 'Código > Reuniones',
+    'about.principle.2.desc': 'Prefiero mostrar resultados que hacer reuniones. El código habla por sí solo.',
+    'about.principle.3.title': 'Producción first',
+    'about.principle.3.desc': 'Todo lo que construyo corre en producción. Docker, CI/CD, monitoreo — desde el primer día.',
+    'about.principle.4.title': 'Entrega completa',
+    'about.principle.4.desc': 'No entrego "casi listo". Documentación, tests, deploy — todo incluido.',
+    'about.links': 'Links rápidos',
+    'about.bio.1': 'Desarrollador backend enfocado en resolver problemas reales con código que funciona. Trabajo con clientes de Brasil, Portugal e internacionales, construyendo desde APIs simples hasta sistemas complejos con múltiples integraciones.',
+    'about.bio.2.start': 'Mi proceso es directo: ',
+    'about.bio.2.highlight': 'entender el problema → diseñar la solución → entregar funcionando',
+    'about.bio.2.end': '. Sin frameworks de moda innecesarios, sin overengineering — solo lo que el proyecto necesita.',
+
+    // Contact
+    'contact.tag': '// Contacto',
+    'contact.title.1': '¿Tienes un proyecto?',
+    'contact.title.2': 'Hablemos.',
+    'contact.placeholder.name': 'Tu nombre',
+    'contact.placeholder.email': 'email@ejemplo.com',
+    'contact.placeholder.subject': '¿De qué se trata?',
+    'contact.placeholder.message': 'Describe tu proyecto...',
+    'contact.btn.idle': '→ Enviar Request',
+    'contact.btn.sending': '⟳ Enviando...',
+    'contact.btn.sent': '✓ Enviado vía WhatsApp',
+    'contact.btn.error': '✗ Error — intenta de nuevo',
+    'contact.response': '// 200 OK — Mensaje abierto en WhatsApp',
+    'contact.availability': 'Disponible para proyectos freelance, consultoría técnica y alianzas. Trabajo 100% remoto con clientes en ',
+    'contact.availability.highlight': 'Brasil, Portugal e internacional',
+    'contact.location': 'Lisboa, Portugal 🇵🇹 — Disponible para proyectos remotos',
+    'contact.whatsapp.msg': '*Nuevo mensaje del portafolio*%0A%0A*Nombre:* {name}%0A*Email:* {email}%0A*Asunto:* {subject}%0A%0A*Mensaje:*%0A{message}',
+
+    // Footer
+    'footer.credit': 'Diseñado y desarrollado por Gabriel Barreto',
+  },
+} as const;
+
+export type TranslationKey = keyof typeof translations.pt;
